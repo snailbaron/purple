@@ -3,7 +3,7 @@
 #include "export.hpp"
 #include "video_impl.hpp"
 
-#include <sdl.hpp>
+#include <sdl_wrapper/sdl.hpp>
 #include <SDL.h>
 
 #include <stdexcept>
@@ -18,7 +18,8 @@ namespace {
  */
 class Sdl {
 public:
-    Sdl(Uint32 flags = SDL_INIT_VIDEO|SDL_INIT_AUDIO);
+    Sdl(Uint32 sdlFlags = SDL_INIT_VIDEO | SDL_INIT_AUDIO,
+        Uint32 imgFlags = IMG_INIT_PNG | IMG_INIT_JPG);
     ~Sdl();
 
     // Initialization and shutdown
@@ -30,15 +31,23 @@ public:
         const std::string& title, int x, int y, int w, int h, Uint32 flags);
 };
 
-Sdl::Sdl(Uint32 flags)
+Sdl::Sdl(Uint32 sdlFlags, Uint32 imgFlags)
 {
-    if (SDL_Init(flags) != 0) {
+    if (SDL_Init(sdlFlags) != 0) {
         throw SdlError("SDL_Init");
+    }
+    //if (IMG_Init(imgFlags) != 0) {
+    //    throw SdlImageError("IMG_Init");
+    //}
+    if (TTF_Init() != 0) {
+        throw SdlTtfError("TTF_Init");
     }
 }
 
 Sdl::~Sdl()
 {
+    TTF_Quit();
+    //IMG_Quit();
     SDL_Quit();
 }
 
@@ -65,9 +74,9 @@ Sdl& sdlInstance()
 // Initialization and shutdown
 //
 
-EXPORT void init(Uint32 flags)
+EXPORT void init()
 {
-    Singleton<Sdl>::initialize(flags);
+    Singleton<Sdl>::initialize();
 }
 
 EXPORT void initSubSystem(Uint32 flags)

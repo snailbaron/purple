@@ -8,14 +8,17 @@
 
 #include <sstream>
 
-SdlError::SdlError(const std::string& function)
+BaseSdlError::BaseSdlError(
+    const std::string& library,
+    const char* (*getError)(),
+    const std::string& function)
 {
     std::ostringstream ss;
-    ss << "SDL error in " << function << ": " << SDL_GetError();
+    ss << library << " error in " << function << ": " << getError();
     _message = ss.str();
 }
 
-const char* SdlError::what() const
+const char* BaseSdlError::what() const
 {
     return _message.c_str();
 }

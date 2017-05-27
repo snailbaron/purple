@@ -1,6 +1,6 @@
 #pragma once
 
-#include <sdl/video.hpp>
+#include <sdl_wrapper/sdl/video.hpp>
 
 namespace sdl {
 

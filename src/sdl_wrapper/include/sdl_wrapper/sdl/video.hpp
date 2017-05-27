@@ -1,6 +1,6 @@
 #pragma once
 
-#include <sdl/render.hpp>
+#include <sdl_wrapper/sdl/render.hpp>
 #include <SDL.h>
 #include <memory>
 
