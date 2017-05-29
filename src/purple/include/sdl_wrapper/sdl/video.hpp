@@ -6,7 +6,7 @@
 
 namespace sdl {
 
-class EXPORT Window {
+class Window {
 public:
     virtual std::shared_ptr<Renderer> createRenderer(
         int index, Uint32 flags) = 0;

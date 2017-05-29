@@ -1,6 +1,5 @@
-#include "singleton.hpp"
+#include <utils/singleton.hpp>
 #include "errors.hpp"
-#include "export.hpp"
 #include "video_impl.hpp"
 
 #include <sdl_wrapper/sdl.hpp>
@@ -36,9 +35,9 @@ Sdl::Sdl(Uint32 sdlFlags, Uint32 imgFlags)
     if (SDL_Init(sdlFlags) != 0) {
         throw SdlError("SDL_Init");
     }
-    //if (IMG_Init(imgFlags) != 0) {
-    //    throw SdlImageError("IMG_Init");
-    //}
+    if (IMG_Init(imgFlags) != imgFlags) {
+        throw SdlImageError("IMG_Init");
+    }
     if (TTF_Init() != 0) {
         throw SdlTtfError("TTF_Init");
     }
@@ -47,7 +46,7 @@ Sdl::Sdl(Uint32 sdlFlags, Uint32 imgFlags)
 Sdl::~Sdl()
 {
     TTF_Quit();
-    //IMG_Quit();
+    IMG_Quit();
     SDL_Quit();
 }
 
@@ -74,27 +73,27 @@ Sdl& sdlInstance()
 // Initialization and shutdown
 //
 
-EXPORT void init()
+void init()
 {
     Singleton<Sdl>::initialize();
 }
 
-EXPORT void initSubSystem(Uint32 flags)
+void initSubSystem(Uint32 flags)
 {
     sdlInstance().initSubSystem(flags);
 }
 
-EXPORT void quit()
+void quit()
 {
     Singleton<Sdl>::destroy();
 }
 
-EXPORT void quitSubSystem(Uint32 flags)
+void quitSubSystem(Uint32 flags)
 {
     sdlInstance().quitSubSystem(flags);
 }
 
-EXPORT Uint32 wasInit(Uint32 flags)
+Uint32 wasInit(Uint32 flags)
 {
     return SDL_WasInit(flags);
 }
@@ -113,7 +112,7 @@ std::shared_ptr<Window> Sdl::createWindow(
 // Exported functions
 //
 
-EXPORT std::shared_ptr<Window> createWindow(
+std::shared_ptr<Window> createWindow(
     const std::string& title, int x, int y, int w, int h, Uint32 flags)
 {
     return sdlInstance().createWindow(title, x, y, w, h, flags);

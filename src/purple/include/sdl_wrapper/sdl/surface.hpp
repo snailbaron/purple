@@ -1,13 +1,12 @@
 #pragma once
 
 #include <sdl_wrapper/sdl/utils.hpp>
-#include <export.hpp>
 #include <SDL.h>
 #include <string>
 
 namespace sdl {
 
-class EXPORT Surface {
+class Surface {
 public:
     virtual const SDL_PixelFormat& format() const = 0;
     virtual int w() const = 0;

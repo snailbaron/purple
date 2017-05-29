@@ -97,7 +97,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)sdl_wrapper\include\;$(SolutionDir)..\lib\SDL2-2.0.5\include\;$(SolutionDir)..\lib\SDL2_image-2.0.1\include\;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)sdl_wrapper\include\;$(SolutionDir)..\lib\SDL2-2.0.5\include\;$(SolutionDir)..\lib\SDL2_image-2.0.1\include\;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\include\;$(ProjectDir)include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -130,7 +130,7 @@ copy /Y "%sdl_ttf_dir%\SDL2_ttf.dll" "$(OutDir)" &gt;NUL
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)sdl_wrapper\include\;$(SolutionDir)..\lib\SDL2-2.0.5\include\;$(SolutionDir)..\lib\SDL2_image-2.0.1\include\;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)sdl_wrapper\include\;$(SolutionDir)..\lib\SDL2-2.0.5\include\;$(SolutionDir)..\lib\SDL2_image-2.0.1\include\;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\include\;$(ProjectDir)include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -165,7 +165,7 @@ copy /Y "%sdl_ttf_dir%\SDL2_ttf.dll" "$(OutDir)" &gt;NUL
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)sdl_wrapper\include\;$(SolutionDir)..\lib\SDL2-2.0.5\include\;$(SolutionDir)..\lib\SDL2_image-2.0.1\include\;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)sdl_wrapper\include\;$(SolutionDir)..\lib\SDL2-2.0.5\include\;$(SolutionDir)..\lib\SDL2_image-2.0.1\include\;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\include\;$(ProjectDir)include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -202,7 +202,7 @@ copy /Y "%sdl_ttf_dir%\SDL2_ttf.dll" "$(OutDir)" &gt;NUL
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)sdl_wrapper\include\;$(SolutionDir)..\lib\SDL2-2.0.5\include\;$(SolutionDir)..\lib\SDL2_image-2.0.1\include\;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)sdl_wrapper\include\;$(SolutionDir)..\lib\SDL2-2.0.5\include\;$(SolutionDir)..\lib\SDL2_image-2.0.1\include\;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\include\;$(ProjectDir)include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -231,7 +231,46 @@ copy /Y "%sdl_ttf_dir%\SDL2_ttf.dll" "$(OutDir)" &gt;NUL
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="core\actor.cpp" />
+    <ClCompile Include="core\core.cpp" />
+    <ClCompile Include="game_timer.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="sdl_wrapper\errors.cpp" />
+    <ClCompile Include="sdl_wrapper\render_impl.cpp" />
+    <ClCompile Include="sdl_wrapper\sdl.cpp" />
+    <ClCompile Include="sdl_wrapper\sdl_image.cpp" />
+    <ClCompile Include="sdl_wrapper\sdl_ttf_impl.cpp" />
+    <ClCompile Include="sdl_wrapper\surface_impl.cpp" />
+    <ClCompile Include="sdl_wrapper\video_impl.cpp" />
+    <ClCompile Include="view\canvas.cpp" />
+    <ClCompile Include="view\player_view.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="core\actor.hpp" />
+    <ClInclude Include="core\component.hpp" />
+    <ClInclude Include="core\core.hpp" />
+    <ClInclude Include="game_timer.hpp" />
+    <ClInclude Include="core\geometry.hpp" />
+    <ClInclude Include="include\utils\basic_geometry.hpp" />
+    <ClInclude Include="sdl_wrapper.hpp" />
+    <ClInclude Include="include\sdl_wrapper.hpp" />
+    <ClInclude Include="sdl_wrapper\errors.hpp" />
+    <ClInclude Include="sdl_wrapper\render_impl.hpp" />
+    <ClInclude Include="include\sdl_wrapper\sdl.hpp" />
+    <ClInclude Include="include\sdl_wrapper\sdl\render.hpp" />
+    <ClInclude Include="include\sdl_wrapper\sdl\surface.hpp" />
+    <ClInclude Include="include\sdl_wrapper\sdl\utils.hpp" />
+    <ClInclude Include="include\sdl_wrapper\sdl\video.hpp" />
+    <ClInclude Include="include\sdl_wrapper\sdl_image.hpp" />
+    <ClInclude Include="include\sdl_wrapper\sdl_ttf.hpp" />
+    <ClInclude Include="sdl_wrapper\sdl_ttf_impl.hpp" />
+    <ClInclude Include="sdl_wrapper\surface_impl.hpp" />
+    <ClInclude Include="sdl_wrapper\video_impl.hpp" />
+    <ClInclude Include="include\utils\singleton.hpp" />
+    <ClInclude Include="view\canvas.hpp" />
+    <ClInclude Include="view\log_view.hpp" />
+    <ClInclude Include="view\player_view.hpp" />
+    <ClInclude Include="view\view.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

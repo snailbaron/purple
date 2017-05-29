@@ -1,6 +1,5 @@
 #pragma once
 
-#include <export.hpp>
 #include <sdl_wrapper/sdl.hpp>
 #include <memory>
 #include <string>
@@ -9,7 +8,7 @@
 
 namespace ttf {
 
-class EXPORT Font {
+class Font {
 public:
     virtual sdl::Size sizeUtf8(const std::string& text) = 0;
 
@@ -21,6 +20,6 @@ public:
         const std::string& text, const SDL_Color& fg) = 0;
 };
 
-EXPORT std::shared_ptr<Font> openFont(const std::string& file, int ptsize);
+std::shared_ptr<Font> openFont(const std::string& file, int ptsize);
 
 } // namespace ttf

@@ -166,32 +166,6 @@
       <ImportLibrary>$(SolutionDir)..\import\windows-$(PlatformTarget)-$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="errors.hpp" />
-    <ClInclude Include="include\sdl_wrapper\sdl\utils.hpp" />
-    <ClInclude Include="sdl_ttf_impl.hpp" />
-    <ClInclude Include="include\sdl_wrapper.hpp" />
-    <ClInclude Include="include\sdl_wrapper\sdl_image.hpp" />
-    <ClInclude Include="include\sdl_wrapper\sdl.hpp" />
-    <ClInclude Include="include\export.hpp" />
-    <ClInclude Include="include\sdl_wrapper\sdl\render.hpp" />
-    <ClInclude Include="include\sdl_wrapper\sdl\surface.hpp" />
-    <ClInclude Include="include\sdl_wrapper\sdl_ttf.hpp" />
-    <ClInclude Include="include\sdl_wrapper\sdl\video.hpp" />
-    <ClInclude Include="render_impl.hpp" />
-    <ClInclude Include="singleton.hpp" />
-    <ClInclude Include="surface_impl.hpp" />
-    <ClInclude Include="video_impl.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="errors.cpp" />
-    <ClCompile Include="sdl_image.cpp" />
-    <ClCompile Include="render_impl.cpp" />
-    <ClCompile Include="sdl.cpp" />
-    <ClCompile Include="surface_impl.cpp" />
-    <ClCompile Include="sdl_ttf_impl.cpp" />
-    <ClCompile Include="video_impl.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

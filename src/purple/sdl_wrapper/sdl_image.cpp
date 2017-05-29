@@ -4,7 +4,7 @@
 
 namespace img {
 
-EXPORT std::shared_ptr<sdl::Surface> load(const std::string& file)
+std::shared_ptr<sdl::Surface> load(const std::string& file)
 {
     SDL_Surface* surface = IMG_Load(file.c_str());
     if (!surface) {

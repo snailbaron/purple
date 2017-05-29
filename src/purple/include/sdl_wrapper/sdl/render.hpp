@@ -1,6 +1,5 @@
 #pragma once
 
-#include <export.hpp>
 #include <sdl_wrapper/sdl/surface.hpp>
 #include <SDL.h>
 #include <memory>
@@ -9,7 +8,7 @@ namespace sdl {
 
 class Texture {};
 
-class EXPORT Renderer {
+class Renderer {
 public:
     virtual std::shared_ptr<Texture> createTextureFromSurface(
         std::shared_ptr<Surface> surface) const = 0;
