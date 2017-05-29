@@ -1,5 +1,7 @@
 #pragma once
 
+#include <utils/variation.hpp>
+
 /**
 * Below is a little clarification and motivation for the component architecture
 * being used.
@@ -59,31 +61,14 @@ enum class ComponentType {
     Position,
 };
 
-struct Component {
-    explicit Component(ComponentType type) : type(type) {}
-    ComponentType type;
-};
+using Component = Variation<ComponentType>;
 
 template <ComponentType CT>
-struct ExactComponent : Component {
-    ExactComponent() : Component(CT) {}
-    static const ComponentType staticType = CT;
-};
+using ComponentOf = typename VariationOf<ComponentType, CT>;
 
-template <ComponentType CT>
-struct ComponentOfHelper;
+#define NEW_COMPONENT(NAME, TYPE) NEW_VARIATION(NAME, ComponentType, TYPE)
 
-template <ComponentType CT>
-using ComponentOf = typename ComponentOfHelper<CT>::Type;
-
-#define COMPONENT(NAME, TYPE)                       \
-    struct NAME;                                    \
-    template <> struct ComponentOfHelper<TYPE> {    \
-        using Type = NAME;                          \
-    };                                              \
-    struct NAME : ExactComponent<TYPE>
-
-COMPONENT(PositionComponent, ComponentType::Position) {
+NEW_COMPONENT(PositionComponent, ComponentType::Position) {
     PositionComponent(WorldPoint position) : position(std::move(position)) {}
     WorldPoint position;
 };

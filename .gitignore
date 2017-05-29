@@ -2,6 +2,7 @@
 /build/
 /import/
 .vs/
+*.VC.VC.opendb
 *.VC.db
 *.swp
 *.vcxproj.user
