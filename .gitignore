@@ -2,5 +2,6 @@
 /build/
 /import/
 .vs/
+*.VC.db
 *.swp
 *.vcxproj.user

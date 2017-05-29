@@ -1,44 +1,10 @@
 #pragma once
 
-#include <optional>
 #include <utility>
 #include <stdexcept>
 #include <type_traits>
 #include <string>
 #include <memory>
-
-template <class T>
-class StorageHolder {
-public:
-    ~StorageHolder()
-    {
-        if (_opt) {
-            _opt.reset();
-        }
-    }
-
-    template <class... Args>
-    void emplace(Args&&... args)
-    {
-        _opt.emplace(std::forward<Args>(args)...);
-    }
-
-    void reset()
-    {
-        _opt.reset();
-    }
-
-    explicit operator bool() const noexcept
-    {
-        return !!_opt;
-    }
-
-    constexpr T& value() { return _opt.value(); }
-    constexpr const T& value() const { return _opt.value(); }
-
-private:
-    std::optional<T> _opt;
-};
 
 template <class T>
 class HeapHolder {
@@ -59,8 +25,8 @@ public:
         return !!_ptr;
     }
 
-    constexpr T& value() { return *_ptr; }
-    constexpr const T& value() const { return *_ptr; }
+    T& value() { return *_ptr; }
+    const T& value() const { return *_ptr; }
 
 private:
     std::unique_ptr<T> _ptr;
@@ -68,7 +34,7 @@ private:
 
 template <class T>
 struct SingletonTraits {
-    using Holder = StorageHolder<T>;
+    using Holder = HeapHolder<T>;
 };
 
 /**
@@ -129,5 +95,5 @@ private:
 };
 
 template <class T>
-typename SingletonTraits<T>::Holder Singleton<T>::_holder {};
+typename Singleton<T>::Holder Singleton<T>::_holder;
 

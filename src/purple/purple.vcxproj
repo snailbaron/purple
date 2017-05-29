@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="debug|Win32">
       <Configuration>debug</Configuration>
@@ -19,36 +19,35 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{C00B4968-2097-40A2-B71D-A7124CBD2CB6}</ProjectGuid>
+    <ProjectGuid>{20ED46BB-2C4D-4946-B275-D30C95258EAB}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>purple</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -73,22 +72,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)..\bin\windows-$(PlatformTarget)-$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)..\build\$(ProjectName)\windows-$(PlatformTarget)-$(Configuration)\</IntDir>
+    <IntDir>$(SolutionDir)..\build\windows-$(PlatformTarget)-$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)..\bin\windows-$(PlatformTarget)-$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)..\build\$(ProjectName)\windows-$(PlatformTarget)-$(Configuration)\</IntDir>
+    <IntDir>$(SolutionDir)..\build\windows-$(PlatformTarget)-$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)..\bin\windows-$(PlatformTarget)-$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)..\build\$(ProjectName)\windows-$(PlatformTarget)-$(Configuration)\</IntDir>
+    <IntDir>$(SolutionDir)..\build\windows-$(PlatformTarget)-$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)..\bin\windows-$(PlatformTarget)-$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)..\build\$(ProjectName)\windows-$(PlatformTarget)-$(Configuration)\</IntDir>
+    <IntDir>$(SolutionDir)..\build\windows-$(PlatformTarget)-$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">
     <ClCompile>
@@ -97,29 +96,30 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)sdl_wrapper\include\;$(SolutionDir)..\lib\SDL2-2.0.5\include\;$(SolutionDir)..\lib\SDL2_image-2.0.1\include\;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\include\;$(ProjectDir)include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\lib\SDL2-2.0.5\include;$(SolutionDir)..\lib\SDL2_image-2.0.1\include;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\include;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\lib\SDL2-2.0.5\lib\$(PlatformTarget)\;$(SolutionDir)..\lib\SDL2_image-2.0.1\lib\$(PlatformTarget)\;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\lib\$(PlatformTarget)\;$(SolutionDir)..\import\windows-$(PlatformTarget)-$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;sdl_wrapper.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\lib\SDL2-2.0.5\lib\$(PlatformTarget)\;$(SolutionDir)..\lib\SDL2_image-2.0.1\lib\$(PlatformTarget)\;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\lib\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>set "sdl_dir=$(SolutionDir)..\lib\SDL2-2.0.5\lib\$(PlatformTarget)"
-copy /Y "%sdl_dir%\SDL2.dll" "$(OutDir)" &gt;NUL
+      <Command>set "sdl_dir=$(SolutionDir)..\lib\SDL2-2.0.5\lib\x86\"
+copy /Y "%sdl_dir%SDL2.dll" "$(OutDir)" &gt;NUL
 
-set "sdl_image_dir=$(SolutionDir)..\lib\SDL2_image-2.0.1\lib\$(PlatformTarget)"
-copy /Y "%sdl_image_dir%\zlib1.dll" "$(OutDir)" &gt;NUL
-copy /Y "%sdl_image_dir%\SDL2_image.dll" "$(OutDir)" &gt;NUL
-copy /Y "%sdl_image_dir%\libwebp-4.dll" "$(OutDir)" &gt;NUL
-copy /Y "%sdl_image_dir%\libtiff-5.dll" "$(OutDir)" &gt;NUL
-copy /Y "%sdl_image_dir%\libpng16-16.dll" "$(OutDir)" &gt;NUL
-copy /Y "%sdl_image_dir%\libjpeg-9.dll" "$(OutDir)" &gt;NUL
+set "sdl_image_dir=$(SolutionDir)..\lib\SDL2_image-2.0.1\lib\x86\"
+copy /Y "%sdl_image_dir%libjpeg-9.dll" "$(OutDir)" &gt;NUL
+copy /Y "%sdl_image_dir%libpng16-16.dll" "$(OutDir)" &gt;NUL
+copy /Y "%sdl_image_dir%libtiff-5.dll" "$(OutDir)" &gt;NUL
+copy /Y "%sdl_image_dir%libwebp-4.dll" "$(OutDir)" &gt;NUL
+copy /Y "%sdl_image_dir%SDL2_image.dll" "$(OutDir)" &gt;NUL
+copy /Y "%sdl_image_dir%zlib1.dll" "$(OutDir)" &gt;NUL
 
-set "sdl_ttf_dir=$(SolutionDir)..\lib\SDL2_ttf-2.0.14\lib\$(PlatformTarget)"
-copy /Y "%sdl_ttf_dir%\libfreetype-6.dll" "$(OutDir)" &gt;NUL
-copy /Y "%sdl_ttf_dir%\SDL2_ttf.dll" "$(OutDir)" &gt;NUL
+set "sdl_ttf_dir=$(SolutionDir)..\lib\SDL2_ttf-2.0.14\lib\x86\"
+copy /Y "%sdl_ttf_dir%libfreetype-6.dll" "$(OutDir)" &gt;NUL
+copy /Y "%sdl_ttf_dir%SDL2_ttf.dll" "$(OutDir)" &gt;NUL
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -130,29 +130,30 @@ copy /Y "%sdl_ttf_dir%\SDL2_ttf.dll" "$(OutDir)" &gt;NUL
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)sdl_wrapper\include\;$(SolutionDir)..\lib\SDL2-2.0.5\include\;$(SolutionDir)..\lib\SDL2_image-2.0.1\include\;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\include\;$(ProjectDir)include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\lib\SDL2-2.0.5\include;$(SolutionDir)..\lib\SDL2_image-2.0.1\include;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\include;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\lib\SDL2-2.0.5\lib\$(PlatformTarget)\;$(SolutionDir)..\lib\SDL2_image-2.0.1\lib\$(PlatformTarget)\;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\lib\$(PlatformTarget)\;$(SolutionDir)..\import\windows-$(PlatformTarget)-$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;sdl_wrapper.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\lib\SDL2-2.0.5\lib\$(PlatformTarget)\;$(SolutionDir)..\lib\SDL2_image-2.0.1\lib\$(PlatformTarget)\;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\lib\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>set "sdl_dir=$(SolutionDir)..\lib\SDL2-2.0.5\lib\$(PlatformTarget)"
-copy /Y "%sdl_dir%\SDL2.dll" "$(OutDir)" &gt;NUL
+      <Command>set "sdl_dir=$(SolutionDir)..\lib\SDL2-2.0.5\lib\x86\"
+copy /Y "%sdl_dir%SDL2.dll" "$(OutDir)" &gt;NUL
 
-set "sdl_image_dir=$(SolutionDir)..\lib\SDL2_image-2.0.1\lib\$(PlatformTarget)"
-copy /Y "%sdl_image_dir%\zlib1.dll" "$(OutDir)" &gt;NUL
-copy /Y "%sdl_image_dir%\SDL2_image.dll" "$(OutDir)" &gt;NUL
-copy /Y "%sdl_image_dir%\libwebp-4.dll" "$(OutDir)" &gt;NUL
-copy /Y "%sdl_image_dir%\libtiff-5.dll" "$(OutDir)" &gt;NUL
-copy /Y "%sdl_image_dir%\libpng16-16.dll" "$(OutDir)" &gt;NUL
-copy /Y "%sdl_image_dir%\libjpeg-9.dll" "$(OutDir)" &gt;NUL
+set "sdl_image_dir=$(SolutionDir)..\lib\SDL2_image-2.0.1\lib\x86\"
+copy /Y "%sdl_image_dir%libjpeg-9.dll" "$(OutDir)" &gt;NUL
+copy /Y "%sdl_image_dir%libpng16-16.dll" "$(OutDir)" &gt;NUL
+copy /Y "%sdl_image_dir%libtiff-5.dll" "$(OutDir)" &gt;NUL
+copy /Y "%sdl_image_dir%libwebp-4.dll" "$(OutDir)" &gt;NUL
+copy /Y "%sdl_image_dir%SDL2_image.dll" "$(OutDir)" &gt;NUL
+copy /Y "%sdl_image_dir%zlib1.dll" "$(OutDir)" &gt;NUL
 
-set "sdl_ttf_dir=$(SolutionDir)..\lib\SDL2_ttf-2.0.14\lib\$(PlatformTarget)"
-copy /Y "%sdl_ttf_dir%\libfreetype-6.dll" "$(OutDir)" &gt;NUL
-copy /Y "%sdl_ttf_dir%\SDL2_ttf.dll" "$(OutDir)" &gt;NUL
+set "sdl_ttf_dir=$(SolutionDir)..\lib\SDL2_ttf-2.0.14\lib\x86\"
+copy /Y "%sdl_ttf_dir%libfreetype-6.dll" "$(OutDir)" &gt;NUL
+copy /Y "%sdl_ttf_dir%SDL2_ttf.dll" "$(OutDir)" &gt;NUL
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -165,31 +166,32 @@ copy /Y "%sdl_ttf_dir%\SDL2_ttf.dll" "$(OutDir)" &gt;NUL
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)sdl_wrapper\include\;$(SolutionDir)..\lib\SDL2-2.0.5\include\;$(SolutionDir)..\lib\SDL2_image-2.0.1\include\;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\include\;$(ProjectDir)include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\lib\SDL2-2.0.5\include;$(SolutionDir)..\lib\SDL2_image-2.0.1\include;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\include;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\lib\SDL2-2.0.5\lib\$(PlatformTarget)\;$(SolutionDir)..\lib\SDL2_image-2.0.1\lib\$(PlatformTarget)\;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\lib\$(PlatformTarget)\;$(SolutionDir)..\import\windows-$(PlatformTarget)-$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;sdl_wrapper.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\lib\SDL2-2.0.5\lib\$(PlatformTarget)\;$(SolutionDir)..\lib\SDL2_image-2.0.1\lib\$(PlatformTarget)\;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\lib\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>set "sdl_dir=$(SolutionDir)..\lib\SDL2-2.0.5\lib\$(PlatformTarget)"
-copy /Y "%sdl_dir%\SDL2.dll" "$(OutDir)" &gt;NUL
+      <Command>set "sdl_dir=$(SolutionDir)..\lib\SDL2-2.0.5\lib\x86\"
+copy /Y "%sdl_dir%SDL2.dll" "$(OutDir)" &gt;NUL
 
-set "sdl_image_dir=$(SolutionDir)..\lib\SDL2_image-2.0.1\lib\$(PlatformTarget)"
-copy /Y "%sdl_image_dir%\zlib1.dll" "$(OutDir)" &gt;NUL
-copy /Y "%sdl_image_dir%\SDL2_image.dll" "$(OutDir)" &gt;NUL
-copy /Y "%sdl_image_dir%\libwebp-4.dll" "$(OutDir)" &gt;NUL
-copy /Y "%sdl_image_dir%\libtiff-5.dll" "$(OutDir)" &gt;NUL
-copy /Y "%sdl_image_dir%\libpng16-16.dll" "$(OutDir)" &gt;NUL
-copy /Y "%sdl_image_dir%\libjpeg-9.dll" "$(OutDir)" &gt;NUL
+set "sdl_image_dir=$(SolutionDir)..\lib\SDL2_image-2.0.1\lib\x86\"
+copy /Y "%sdl_image_dir%libjpeg-9.dll" "$(OutDir)" &gt;NUL
+copy /Y "%sdl_image_dir%libpng16-16.dll" "$(OutDir)" &gt;NUL
+copy /Y "%sdl_image_dir%libtiff-5.dll" "$(OutDir)" &gt;NUL
+copy /Y "%sdl_image_dir%libwebp-4.dll" "$(OutDir)" &gt;NUL
+copy /Y "%sdl_image_dir%SDL2_image.dll" "$(OutDir)" &gt;NUL
+copy /Y "%sdl_image_dir%zlib1.dll" "$(OutDir)" &gt;NUL
 
-set "sdl_ttf_dir=$(SolutionDir)..\lib\SDL2_ttf-2.0.14\lib\$(PlatformTarget)"
-copy /Y "%sdl_ttf_dir%\libfreetype-6.dll" "$(OutDir)" &gt;NUL
-copy /Y "%sdl_ttf_dir%\SDL2_ttf.dll" "$(OutDir)" &gt;NUL
+set "sdl_ttf_dir=$(SolutionDir)..\lib\SDL2_ttf-2.0.14\lib\x86\"
+copy /Y "%sdl_ttf_dir%libfreetype-6.dll" "$(OutDir)" &gt;NUL
+copy /Y "%sdl_ttf_dir%SDL2_ttf.dll" "$(OutDir)" &gt;NUL
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -202,31 +204,32 @@ copy /Y "%sdl_ttf_dir%\SDL2_ttf.dll" "$(OutDir)" &gt;NUL
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)sdl_wrapper\include\;$(SolutionDir)..\lib\SDL2-2.0.5\include\;$(SolutionDir)..\lib\SDL2_image-2.0.1\include\;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\include\;$(ProjectDir)include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\lib\SDL2-2.0.5\include;$(SolutionDir)..\lib\SDL2_image-2.0.1\include;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\include;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\lib\SDL2-2.0.5\lib\$(PlatformTarget)\;$(SolutionDir)..\lib\SDL2_image-2.0.1\lib\$(PlatformTarget)\;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\lib\$(PlatformTarget)\;$(SolutionDir)..\import\windows-$(PlatformTarget)-$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;sdl_wrapper.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\lib\SDL2-2.0.5\lib\$(PlatformTarget)\;$(SolutionDir)..\lib\SDL2_image-2.0.1\lib\$(PlatformTarget)\;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\lib\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>set "sdl_dir=$(SolutionDir)..\lib\SDL2-2.0.5\lib\$(PlatformTarget)"
-copy /Y "%sdl_dir%\SDL2.dll" "$(OutDir)" &gt;NUL
+      <Command>set "sdl_dir=$(SolutionDir)..\lib\SDL2-2.0.5\lib\x86\"
+copy /Y "%sdl_dir%SDL2.dll" "$(OutDir)" &gt;NUL
 
-set "sdl_image_dir=$(SolutionDir)..\lib\SDL2_image-2.0.1\lib\$(PlatformTarget)"
-copy /Y "%sdl_image_dir%\zlib1.dll" "$(OutDir)" &gt;NUL
-copy /Y "%sdl_image_dir%\SDL2_image.dll" "$(OutDir)" &gt;NUL
-copy /Y "%sdl_image_dir%\libwebp-4.dll" "$(OutDir)" &gt;NUL
-copy /Y "%sdl_image_dir%\libtiff-5.dll" "$(OutDir)" &gt;NUL
-copy /Y "%sdl_image_dir%\libpng16-16.dll" "$(OutDir)" &gt;NUL
-copy /Y "%sdl_image_dir%\libjpeg-9.dll" "$(OutDir)" &gt;NUL
+set "sdl_image_dir=$(SolutionDir)..\lib\SDL2_image-2.0.1\lib\x86\"
+copy /Y "%sdl_image_dir%libjpeg-9.dll" "$(OutDir)" &gt;NUL
+copy /Y "%sdl_image_dir%libpng16-16.dll" "$(OutDir)" &gt;NUL
+copy /Y "%sdl_image_dir%libtiff-5.dll" "$(OutDir)" &gt;NUL
+copy /Y "%sdl_image_dir%libwebp-4.dll" "$(OutDir)" &gt;NUL
+copy /Y "%sdl_image_dir%SDL2_image.dll" "$(OutDir)" &gt;NUL
+copy /Y "%sdl_image_dir%zlib1.dll" "$(OutDir)" &gt;NUL
 
-set "sdl_ttf_dir=$(SolutionDir)..\lib\SDL2_ttf-2.0.14\lib\$(PlatformTarget)"
-copy /Y "%sdl_ttf_dir%\libfreetype-6.dll" "$(OutDir)" &gt;NUL
-copy /Y "%sdl_ttf_dir%\SDL2_ttf.dll" "$(OutDir)" &gt;NUL
+set "sdl_ttf_dir=$(SolutionDir)..\lib\SDL2_ttf-2.0.14\lib\x86\"
+copy /Y "%sdl_ttf_dir%libfreetype-6.dll" "$(OutDir)" &gt;NUL
+copy /Y "%sdl_ttf_dir%SDL2_ttf.dll" "$(OutDir)" &gt;NUL
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -249,13 +252,9 @@ copy /Y "%sdl_ttf_dir%\SDL2_ttf.dll" "$(OutDir)" &gt;NUL
     <ClInclude Include="core\actor.hpp" />
     <ClInclude Include="core\component.hpp" />
     <ClInclude Include="core\core.hpp" />
-    <ClInclude Include="game_timer.hpp" />
     <ClInclude Include="core\geometry.hpp" />
-    <ClInclude Include="include\utils\basic_geometry.hpp" />
-    <ClInclude Include="sdl_wrapper.hpp" />
+    <ClInclude Include="game_timer.hpp" />
     <ClInclude Include="include\sdl_wrapper.hpp" />
-    <ClInclude Include="sdl_wrapper\errors.hpp" />
-    <ClInclude Include="sdl_wrapper\render_impl.hpp" />
     <ClInclude Include="include\sdl_wrapper\sdl.hpp" />
     <ClInclude Include="include\sdl_wrapper\sdl\render.hpp" />
     <ClInclude Include="include\sdl_wrapper\sdl\surface.hpp" />
@@ -263,10 +262,14 @@ copy /Y "%sdl_ttf_dir%\SDL2_ttf.dll" "$(OutDir)" &gt;NUL
     <ClInclude Include="include\sdl_wrapper\sdl\video.hpp" />
     <ClInclude Include="include\sdl_wrapper\sdl_image.hpp" />
     <ClInclude Include="include\sdl_wrapper\sdl_ttf.hpp" />
+    <ClInclude Include="include\utils\basic_geometry.hpp" />
+    <ClInclude Include="include\utils\singleton.hpp" />
+    <ClInclude Include="sdl_wrapper.hpp" />
+    <ClInclude Include="sdl_wrapper\errors.hpp" />
+    <ClInclude Include="sdl_wrapper\render_impl.hpp" />
     <ClInclude Include="sdl_wrapper\sdl_ttf_impl.hpp" />
     <ClInclude Include="sdl_wrapper\surface_impl.hpp" />
     <ClInclude Include="sdl_wrapper\video_impl.hpp" />
-    <ClInclude Include="include\utils\singleton.hpp" />
     <ClInclude Include="view\canvas.hpp" />
     <ClInclude Include="view\log_view.hpp" />
     <ClInclude Include="view\player_view.hpp" />

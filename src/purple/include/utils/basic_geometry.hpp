@@ -11,7 +11,7 @@
 
 template <class T>
 struct Vector {
-    static_assert(std::is_arithmetic<T>(),
+    static_assert(std::is_arithmetic<T>::value,
         "Vector: can only wrap arithmetic types");
 
     Vector() : x(0), y(0) {}
