@@ -13,6 +13,16 @@ void Core::update(double deltaSec)
         });
 }
 
+void Core::spawn(std::shared_ptr<Actor> actor)
+{
+    _actors.push_back(actor);
+    forActiveViews(
+        [actor](std::shared_ptr<View> view) {
+            view->onActorSpawn(actor);
+        }
+    );
+}
+
 void Core::forActiveViews(std::function<void(std::shared_ptr<View>)> action)
 {
     for (auto i = _views.begin(); i != _views.end(); ) {

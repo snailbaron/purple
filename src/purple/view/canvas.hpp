@@ -18,8 +18,12 @@ class Canvas {
 public:
     Canvas();
 
+    std::shared_ptr<sdl::Texture> createTextureFromSurface(
+        std::shared_ptr<sdl::Surface> surface) const;
+
     void clear(const Color& color);
     void present();
+    void drawTexture(std::shared_ptr<sdl::Texture> texture);
 
 private:
     std::shared_ptr<sdl::Renderer> _renderer;

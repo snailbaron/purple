@@ -22,6 +22,12 @@ Canvas::Canvas()
         SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 }
 
+std::shared_ptr<sdl::Texture> Canvas::createTextureFromSurface(
+    std::shared_ptr<sdl::Surface> surface) const
+{
+    return _renderer->createTextureFromSurface(surface);
+}
+
 void Canvas::clear(const Color& color)
 {
     _renderer->setDrawColor(color.r, color.g, color.b, color.a);
@@ -31,4 +37,11 @@ void Canvas::clear(const Color& color)
 void Canvas::present()
 {
     _renderer->present();
+}
+
+void Canvas::drawTexture(std::shared_ptr<sdl::Texture> texture)
+{
+    // This bullshit is just to finally see something apart from the gray
+    // screen. Please remove ASAP.
+    _renderer->copy(texture, {0, 0, 64, 64}, {10, 10, 64, 64});
 }

@@ -18,16 +18,19 @@ int main(int argc, char** argv)
     try {
         Core core;
         
-        std::shared_ptr<View> view(new PlayerView());
+        std::shared_ptr<PlayerView> view(new PlayerView());
+        view->loadResources();
         core.attach(view);
 
         std::shared_ptr<View> logView(new LogView());
         core.attach(logView);
 
         auto tree = std::make_shared<Actor>();
+        tree->name("tree");
         tree->emplaceComponent<ComponentType::Position>(WorldPoint(0, 0));
-        
-        
+        tree->emplaceComponent<ComponentType::Graphics>(
+            "tree.png");
+        core.spawn(tree);
 
         bool done = false;
         GameTimer timer;
