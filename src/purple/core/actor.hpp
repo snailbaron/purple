@@ -6,6 +6,7 @@
 #include <memory>
 #include <utility>
 #include <map>
+#include <set>
 
 class Actor {
 public:
@@ -29,8 +30,22 @@ public:
     template <ComponentType CT>
     std::shared_ptr<ComponentOf<CT>> getComponent()
     {
-        return std::static_pointer_cast<ComponentOf<CT>, Component>(
-            _components[CT]);
+        auto i = _components.find(CT);
+        if (i != _components.end()) {
+            return std::static_pointer_cast<ComponentOf<CT>, Component>(
+                i->second);
+        } else {
+            return nullptr;
+        }
+    }
+
+    std::set<ComponentType> componentTypes()
+    {
+        std::set<ComponentType> result;
+        for (const auto& pair : _components) {
+            result.insert(pair.first);
+        }
+        return result;
     }
 
 private:

@@ -175,3 +175,9 @@ using VariationOf = typename VariationOfTypeHolder<VT, type>::Type;
     };                                                              \
     struct NAME : NewVariation<CATEGORY, TYPE>
 
+#define IMPLEMENT_VARIATION(NAME, TYPE_ENUM)                                \
+    using NAME = Variation<TYPE_ENUM>;                                      \
+                                                                            \
+    template <TYPE_ENUM Provided ## TYPE_ENUM>                              \
+    using NAME ## Of =                                                      \
+        typename VariationOf<TYPE_ENUM, Provided ## TYPE_ENUM>;

@@ -236,8 +236,10 @@ copy /Y "%sdl_ttf_dir%SDL2_ttf.dll" "$(OutDir)" &gt;NUL
   <ItemGroup>
     <ClCompile Include="core\actor.cpp" />
     <ClCompile Include="core\core.cpp" />
+    <ClCompile Include="core\tile_level.cpp" />
     <ClCompile Include="event_queue.cpp" />
     <ClCompile Include="game_timer.cpp" />
+    <ClCompile Include="view\geometry.cpp" />
     <ClCompile Include="view\log_view.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="sdl_wrapper\errors.cpp" />
@@ -250,12 +252,14 @@ copy /Y "%sdl_ttf_dir%SDL2_ttf.dll" "$(OutDir)" &gt;NUL
     <ClCompile Include="view\canvas.cpp" />
     <ClCompile Include="view\player_view.cpp" />
     <ClCompile Include="view\resources.cpp" />
+    <ClCompile Include="view\scene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\actor.hpp" />
     <ClInclude Include="core\component.hpp" />
     <ClInclude Include="core\core.hpp" />
     <ClInclude Include="core\geometry.hpp" />
+    <ClInclude Include="core\tile_level.h" />
     <ClInclude Include="events.hpp" />
     <ClInclude Include="event_queue.hpp" />
     <ClInclude Include="game_timer.hpp" />
@@ -277,9 +281,11 @@ copy /Y "%sdl_ttf_dir%SDL2_ttf.dll" "$(OutDir)" &gt;NUL
     <ClInclude Include="sdl_wrapper\video_impl.hpp" />
     <ClInclude Include="include\utils\variation.hpp" />
     <ClInclude Include="view\canvas.hpp" />
+    <ClInclude Include="view\geometry.hpp" />
     <ClInclude Include="view\log_view.hpp" />
     <ClInclude Include="view\player_view.hpp" />
     <ClInclude Include="view\resources.hpp" />
+    <ClInclude Include="view\scene.hpp" />
     <ClInclude Include="view\view.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

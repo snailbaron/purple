@@ -12,7 +12,9 @@ public:
     WindowImpl(const std::string& title, int x, int y, int w, int h, Uint32 flags);
     ~WindowImpl();
 
-    std::shared_ptr<Renderer> createRenderer(int index, Uint32 flags);
+    std::tuple<int, int> size() const override;
+
+    std::shared_ptr<Renderer> createRenderer(int index, Uint32 flags) override;
 
 private:
     SDL_Window* _window = nullptr;

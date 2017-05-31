@@ -13,21 +13,18 @@ PlayerView::PlayerView()
 
 void PlayerView::loadResources()
 {
-    _resources.loadBitmaps();
-    _resources.convertBitmapsToTextures(_canvas);
+    _resources.loadGraphics(_canvas, "../../assets");
 }
 
 void PlayerView::update(double deltaSec)
 {
+    _scene.update(deltaSec);
 }
 
 void PlayerView::render()
 {
     _canvas.clear(BACKGROUND_COLOR);
-    for (const auto& drawable : _drawables) {
-        _canvas.drawTexture(drawable.second);
-    }
-
+    _scene.render(_canvas);
     _canvas.present();
 }
 
@@ -37,12 +34,14 @@ void PlayerView::render()
 
 void PlayerView::onActorSpawn(std::shared_ptr<Actor> actor)
 {
-    if (actor->hasComponent(ComponentType::Position) &&
-            actor->hasComponent(ComponentType::Graphics)) {
-        auto position =
-            actor->getComponent<ComponentType::Position>()->position;
-        auto texture = _resources.texture(
-            actor->getComponent<ComponentType::Graphics>()->graphics);
-        _drawables[position] = texture;
+    auto position = actor->getComponent<ComponentType::Position>();
+    auto graphics = actor->getComponent<ComponentType::Graphics>();
+    auto camera = actor->getComponent<ComponentType::Camera>();
+
+    if (position && camera) {
+        _scene.positionCamera(position->position);
+    } else if (position && graphics) {
+        _scene.placeGraphics(
+            position->position, _resources.graphics(graphics->graphics)); // <-- madness, do something about it
     }
 }

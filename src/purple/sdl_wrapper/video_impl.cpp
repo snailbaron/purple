@@ -20,6 +20,13 @@ WindowImpl::~WindowImpl()
     }
 }
 
+std::tuple<int, int> WindowImpl::size() const
+{
+    std::tuple<int, int> result;
+    SDL_GetWindowSize(_window, &std::get<0>(result), &std::get<1>(result));
+    return result;
+}
+
 std::shared_ptr<Renderer> WindowImpl::createRenderer(int index, Uint32 flags)
 {
     SDL_Renderer* renderer = SDL_CreateRenderer(_window, index, flags);

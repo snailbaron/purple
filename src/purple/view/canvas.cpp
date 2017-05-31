@@ -10,16 +10,27 @@ const int WINDOW_HEIGHT = 768;
 
 Canvas::Canvas()
 {
-    auto window = sdl::createWindow(
+    _window = sdl::createWindow(
         WINDOW_TITLE,
         SDL_WINDOWPOS_UNDEFINED,
         SDL_WINDOWPOS_UNDEFINED,
         WINDOW_WIDTH,
         WINDOW_HEIGHT,
         SDL_WINDOW_RESIZABLE);
-    _renderer = window->createRenderer(
+    _renderer = _window->createRenderer(
         -1,
         SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+}
+
+ScreenSize Canvas::size() const
+{
+    std::tuple<int, int> windowSize = _window->size();
+    return {std::get<0>(windowSize), std::get<1>(windowSize)};
+}
+
+ScreenPoint Canvas::middle() const
+{
+    return size() / 2;
 }
 
 std::shared_ptr<sdl::Texture> Canvas::createTextureFromSurface(
@@ -39,9 +50,10 @@ void Canvas::present()
     _renderer->present();
 }
 
-void Canvas::drawTexture(std::shared_ptr<sdl::Texture> texture)
+void Canvas::drawTexture(
+    std::shared_ptr<sdl::Texture> texture,
+    const SDL_Rect& src,
+    const SDL_Rect& dst)
 {
-    // This bullshit is just to finally see something apart from the gray
-    // screen. Please remove ASAP.
-    _renderer->copy(texture, {0, 0, 64, 64}, {10, 10, 64, 64});
+    _renderer->copy(texture, src, dst);
 }

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "geometry.hpp"
 #include <sdl_wrapper.hpp>
 #include <memory>
 #include <cstdint>
@@ -21,10 +22,19 @@ public:
     std::shared_ptr<sdl::Texture> createTextureFromSurface(
         std::shared_ptr<sdl::Surface> surface) const;
 
+    ScreenSize size() const;
+    ScreenPoint middle() const;
+
     void clear(const Color& color);
     void present();
-    void drawTexture(std::shared_ptr<sdl::Texture> texture);
+
+    void drawTexture(
+        std::shared_ptr<sdl::Texture> texture,
+        const SDL_Rect& src,
+        const SDL_Rect& dst);
+        
 
 private:
+    std::shared_ptr<sdl::Window> _window;
     std::shared_ptr<sdl::Renderer> _renderer;
 };
