@@ -28,6 +28,7 @@ int main(int argc, char** argv)
         auto camera = std::make_shared<Actor>();
         camera->name("camera");
         camera->emplaceComponent<ComponentType::Camera>();
+        camera->emplaceComponent<ComponentType::Position>(WorldPoint(0, 0));
         core.spawn(camera);
 
         auto tree = std::make_shared<Actor>();
