@@ -25,23 +25,7 @@ int main(int argc, char** argv)
         std::shared_ptr<View> logView(new LogView());
         core.attach(logView);
 
-        auto camera = std::make_shared<Actor>();
-        camera->name("camera");
-        camera->emplaceComponent<ComponentType::Camera>();
-        camera->emplaceComponent<ComponentType::Position>(WorldPoint(0, 0));
-        core.spawn(camera);
-
-        auto tree = std::make_shared<Actor>();
-        tree->name("tree");
-        tree->emplaceComponent<ComponentType::Position>(WorldPoint(0, 0));
-        tree->emplaceComponent<ComponentType::Graphics>("bitmaps/tree.png");
-        core.spawn(tree);
-
-        auto girl = std::make_shared<Actor>();
-        girl->name("girl");
-        girl->emplaceComponent<ComponentType::Position>(WorldPoint(-2.0, 3.5));
-        girl->emplaceComponent<ComponentType::Graphics>("animations/girl2.png");
-        core.spawn(girl);
+        core.loadTestLevel();
 
         bool done = false;
         GameTimer timer;

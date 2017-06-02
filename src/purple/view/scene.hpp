@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../core/tile_map.h"
 #include "resources.hpp"
 #include <vector>
 #include <string>
@@ -44,6 +45,18 @@ private:
     double _playTime;
 };
 
+struct SceneTiles {
+public:
+    void loadTiles(const ResourceStorage& resources, const TileMap& tileMap);
+    void render(Canvas& canvas, const ScreenOffset& screenOffset) const;
+
+private:
+    size_t _width;
+    size_t _height;
+    ScreenSize _tileSize {64, 64};
+    std::vector<std::shared_ptr<BitmapResource>> _tileBitmaps;
+};
+
 /**
  * Scene holds all drawable objects to be displayed on screen. Its primary task
  * is to forward drawing requests to the contained objects.
@@ -58,8 +71,10 @@ public:
     void positionCamera(const WorldPoint& position);
     void placeGraphics(
         const WorldPoint& position, std::shared_ptr<Resource> resource);
+    void setTiles(const ResourceStorage& resources, const TileMap& tileMap);
 
 private:
     WorldPoint _cameraPosition;
+    SceneTiles _tileLayer;
     std::vector<std::unique_ptr<SceneObject>> _objects;
 };

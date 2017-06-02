@@ -9,10 +9,10 @@
 template <class T>
 class HeapHolder {
 public:
-    template <class... Args>
-    void emplace(Args&&... args)
+    template <class... ArgTypes>
+    void emplace(ArgTypes&&... args)
     {
-        _ptr = std::make_unique<T>(std::forward<Args>(args)...);
+        _ptr = std::make_unique<T>(std::forward<ArgTypes>(args)...);
     }
 
     void reset()
@@ -45,13 +45,13 @@ class Singleton {
     using Holder = typename SingletonTraits<T>::Holder;
 
 public:
-    template <class... Args>
-    static void initialize(Args&&... args)
+    template <class... ArgTypes>
+    static void initialize(ArgTypes&&... args)
     {
         if (_holder) {
             throw std::runtime_error(typeName() + ": already initialized");
         }
-        _holder.emplace(std::forward<Args>(args)...);
+        _holder.emplace(std::forward<ArgTypes>(args)...);
     }
 
     static void destroy()

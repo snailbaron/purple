@@ -15,11 +15,11 @@ public:
 
     void addComponent(std::shared_ptr<Component> component);
 
-    template <ComponentType CT, class... Args>
-    void emplaceComponent(Args&&... args)
+    template <ComponentType CT, class... ArgTypes>
+    void emplaceComponent(ArgTypes&&... args)
     {
         _components[CT] = std::shared_ptr<Component>(
-            new ComponentOf<CT>(std::forward<Args>(args)...));
+            new ComponentOf<CT>(std::forward<ArgTypes>(args)...));
     }
 
     bool hasComponent(ComponentType type)

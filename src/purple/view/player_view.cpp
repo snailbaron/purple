@@ -45,3 +45,8 @@ void PlayerView::onActorSpawn(std::shared_ptr<Actor> actor)
             position->position, _resources.graphics(graphics->graphics)); // <-- madness, do something about it
     }
 }
+
+void PlayerView::onTilesLoaded(const TileMap& tileMap)
+{
+    _scene.setTiles(_resources, tileMap);
+}

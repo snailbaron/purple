@@ -63,13 +63,13 @@
     <ClCompile Include="view\resources.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="core\tile_level.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="view\scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="view\geometry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\tile_map.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -161,13 +161,13 @@
     <ClInclude Include="view\resources.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\tile_level.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="view\scene.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="view\geometry.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\tile_map.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
