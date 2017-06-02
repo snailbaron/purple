@@ -9,7 +9,7 @@
 #include <map>
 #include <set>
 
-class Actor {
+class Actor : public std::enable_shared_from_this<Actor> {
 public:
     const std::string& name() const { return _name; }
     Actor& name(std::string name) { _name = std::move(name); return *this; }
@@ -17,7 +17,9 @@ public:
     template <class ExactComponent, class... ArgTypes>
     void emplace(ArgTypes&&... args)
     {
-        _components.emplace<ExactComponent>(std::forward<ArgTypes>(args)...);
+        auto component = _components.emplace<ExactComponent>(
+            std::forward<ArgTypes>(args)...);
+        component->actorPtr = shared_from_this();
     }
 
     template <class ExactComponent>

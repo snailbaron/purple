@@ -13,8 +13,14 @@ class PlayerView : public View {
 public:
     PlayerView();
 
+    // Notifications from game core
     void onActorSpawn(std::shared_ptr<Actor> actor) override;
     void onTilesLoaded(const TileMap& tileMap) override;
+    void onControllerSpawn(
+        std::shared_ptr<ControllerComponent> controller) override;
+
+    // User input
+    bool processInput();
 
     void loadResources();
 
@@ -22,7 +28,10 @@ public:
     void render() override;
 
 private:
+    Vector<double> motionInput(int mouseX, int mouseY) const;
+
     Canvas _canvas;
     ResourceStorage _resources;
     Scene _scene;
+    std::weak_ptr<ControllerComponent> _controller;
 };

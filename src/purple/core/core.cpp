@@ -1,6 +1,7 @@
 #include "core.hpp"
 #include "tile_map.h"
 #include "component.hpp"
+#include <iostream>
 
 void Core::attach(std::shared_ptr<View> view)
 {
@@ -9,6 +10,21 @@ void Core::attach(std::shared_ptr<View> view)
 
 void Core::update(double deltaSec)
 {
+    // Process movement
+    for (auto actor : _actors) {
+        auto movement = actor->get<MovementComponent>();
+        if (movement) {
+            std::cerr << movement->speed.x << ", " << movement->speed.y << std::endl;
+            movement->speed += movement->acceleration;
+            movement->speed.shorten(movement->maxSpeed);
+
+            auto position = actor->get<PositionComponent>();
+            if (position) {
+                position->position += movement->speed;
+            }
+        }
+    }
+
     forActiveViews(
         [deltaSec](std::shared_ptr<View> view) {
             view->update(deltaSec);
@@ -19,6 +35,11 @@ void Core::spawn(std::shared_ptr<Actor> actor)
 {
     _actors.push_back(actor);
     notifyViews(&View::onActorSpawn, actor);
+
+    auto controller = actor->get<ControllerComponent>();
+    if (controller) {
+        notifyViews(&View::onControllerSpawn, controller);
+    }
 }
 
 void Core::forActiveViews(std::function<void(std::shared_ptr<View>)> action)
@@ -74,5 +95,7 @@ void Core::loadTestLevel()
     girl->name("girl");
     girl->emplace<PositionComponent>(WorldPoint(9, 12));
     girl->emplace<GraphicsComponent>("animations/girl2.png");
+    girl->emplace<MovementComponent>(10.0, 5.0);
+    girl->emplace<ControllerComponent>();
     spawn(girl);
 }

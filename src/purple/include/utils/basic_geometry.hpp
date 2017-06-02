@@ -8,6 +8,7 @@
 
 #include <type_traits>
 #include <tuple>
+#include <cmath>
 
 template <class T>
 struct Vector {
@@ -48,6 +49,22 @@ struct Vector {
     {
         x /= div;
         y /= div;
+        return *this;
+    }
+
+    double length() const
+    {
+        return std::sqrt(x * x + y * y);
+    }
+
+    // Limit vector length without changing direction
+    Vector& shorten(T maxLength)
+    {
+        double ratio = maxLength / length();
+        if (ratio < 1) {
+            x *= ratio;
+            y *= ratio;
+        }
         return *this;
     }
 

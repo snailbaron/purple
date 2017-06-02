@@ -30,13 +30,8 @@ int main(int argc, char** argv)
         bool done = false;
         GameTimer timer;
         while (!done) {
-            SDL_Event evt;
-            while (SDL_PollEvent(&evt)) {
-                switch (evt.type) {
-                    case SDL_QUIT:
-                        done = true;
-                        break;
-                }
+            if (!view->processInput()) {
+                done = true;
             }
 
             if (timer.advance(GAME_SPF)) {

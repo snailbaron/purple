@@ -5,8 +5,13 @@
 #include "geometry.hpp"
 #include <utility>
 #include <string>
+#include <memory>
 
-struct Component {};
+class Actor;
+
+struct Component {
+    std::weak_ptr<Actor> actorPtr;
+};
 
 struct PositionComponent : Component {
     PositionComponent(WorldPoint position) : position(std::move(position)) {}
@@ -23,4 +28,14 @@ struct CameraComponent : Component {
 
 struct ControllerComponent : Component {
     void setInput(double x, double y);
+};
+
+struct MovementComponent : Component {
+    MovementComponent(double maxSpeed, double maxAcceleration)
+        : maxSpeed(maxSpeed), maxAcceleration(maxAcceleration) {}
+
+    WorldVector speed;
+    WorldVector acceleration;
+    double maxAcceleration;
+    double maxSpeed;
 };

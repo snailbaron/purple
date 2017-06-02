@@ -41,16 +41,18 @@ public:
             "Mix::put: type is not a subclass of Mix's base");
 
         _values[std::type_index(typeid(Exact))] = ptr;
+        return ptr;
     }
 
     template <class Exact, class... Args>
-    void emplace(Args&&... args)
+    std::shared_ptr<Exact> emplace(Args&&... args)
     {
         static_assert(std::is_base_of<Base, Exact>::value,
             "Mix::emplace: type is not a subclass of Mix's base");
 
-        std::shared_ptr<Base> ptr(new Exact(std::forward<Args>(args)...));
+        auto ptr = std::make_shared<Exact>(std::forward<Args>(args)...);
         _values[std::type_index(typeid(Exact))] = ptr;
+        return ptr;
     }
 
 private:
