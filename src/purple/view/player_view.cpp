@@ -34,9 +34,9 @@ void PlayerView::render()
 
 void PlayerView::onActorSpawn(std::shared_ptr<Actor> actor)
 {
-    auto position = actor->getComponent<ComponentType::Position>();
-    auto graphics = actor->getComponent<ComponentType::Graphics>();
-    auto camera = actor->getComponent<ComponentType::Camera>();
+    auto position = actor->get<PositionComponent>();
+    auto graphics = actor->get<GraphicsComponent>();
+    auto camera = actor->get<CameraComponent>();
 
     if (position && camera) {
         _scene.positionCamera(position->position);

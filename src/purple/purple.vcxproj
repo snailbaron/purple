@@ -234,7 +234,7 @@ copy /Y "%sdl_ttf_dir%SDL2_ttf.dll" "$(OutDir)" &gt;NUL
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="core\actor.cpp" />
+    <ClCompile Include="core\component.cpp" />
     <ClCompile Include="core\core.cpp" />
     <ClCompile Include="core\tile_map.cpp" />
     <ClCompile Include="event_queue.cpp" />
@@ -272,6 +272,7 @@ copy /Y "%sdl_ttf_dir%SDL2_ttf.dll" "$(OutDir)" &gt;NUL
     <ClInclude Include="include\sdl_wrapper\sdl_image.hpp" />
     <ClInclude Include="include\sdl_wrapper\sdl_ttf.hpp" />
     <ClInclude Include="include\utils\basic_geometry.hpp" />
+    <ClInclude Include="include\utils\mix.hpp" />
     <ClInclude Include="include\utils\singleton.hpp" />
     <ClInclude Include="sdl_wrapper.hpp" />
     <ClInclude Include="sdl_wrapper\errors.hpp" />

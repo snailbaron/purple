@@ -1,6 +1,7 @@
 #pragma once
 
 #include "component.hpp"
+#include <utils/mix.hpp>
 #include <string>
 #include <vector>
 #include <memory>
@@ -13,42 +14,25 @@ public:
     const std::string& name() const { return _name; }
     Actor& name(std::string name) { _name = std::move(name); return *this; }
 
-    void addComponent(std::shared_ptr<Component> component);
-
-    template <ComponentType CT, class... ArgTypes>
-    void emplaceComponent(ArgTypes&&... args)
+    template <class ExactComponent, class... ArgTypes>
+    void emplace(ArgTypes&&... args)
     {
-        _components[CT] = std::shared_ptr<Component>(
-            new ComponentOf<CT>(std::forward<ArgTypes>(args)...));
+        _components.emplace<ExactComponent>(std::forward<ArgTypes>(args)...);
     }
 
-    bool hasComponent(ComponentType type)
+    template <class ExactComponent>
+    bool has()
     {
-        return _components.find(type) != _components.end();
+        return _components.has<ExactComponent>();
     }
 
-    template <ComponentType CT>
-    std::shared_ptr<ComponentOf<CT>> getComponent()
+    template <class ExactComponent>
+    std::shared_ptr<ExactComponent> get()
     {
-        auto i = _components.find(CT);
-        if (i != _components.end()) {
-            return std::static_pointer_cast<ComponentOf<CT>, Component>(
-                i->second);
-        } else {
-            return nullptr;
-        }
-    }
-
-    std::set<ComponentType> componentTypes()
-    {
-        std::set<ComponentType> result;
-        for (const auto& pair : _components) {
-            result.insert(pair.first);
-        }
-        return result;
+        return _components.get<ExactComponent>();
     }
 
 private:
     std::string _name;
-    std::map<ComponentType, std::shared_ptr<Component>> _components;
+    Mix<Component> _components;
 };

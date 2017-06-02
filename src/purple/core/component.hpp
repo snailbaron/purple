@@ -6,34 +6,21 @@
 #include <utility>
 #include <string>
 
-enum class ComponentType {
-    Position,
-    Graphics,
-    Camera,
-    TileMap,
-};
+struct Component {};
 
-using Component = Variation<ComponentType>;
-
-template <ComponentType CT>
-using ComponentOf = typename VariationOf<ComponentType, CT>;
-
-#define NEW_COMPONENT(TYPE) \
-    NEW_VARIATION(TYPE ## Component, ComponentType, ComponentType:: TYPE)
-
-NEW_COMPONENT(Position) {
+struct PositionComponent : Component {
     PositionComponent(WorldPoint position) : position(std::move(position)) {}
     WorldPoint position;
 };
 
-NEW_COMPONENT(Graphics) {
+struct GraphicsComponent : Component {
     GraphicsComponent(std::string graphics) : graphics(std::move(graphics)) {}
     std::string graphics;
 };
 
-NEW_COMPONENT(Camera) {
+struct CameraComponent : Component {
 };
 
-NEW_COMPONENT(TileMap) {
-    
+struct ControllerComponent : Component {
+    void setInput(double x, double y);
 };

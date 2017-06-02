@@ -1,5 +1,6 @@
 #include "core.hpp"
 #include "tile_map.h"
+#include "component.hpp"
 
 void Core::attach(std::shared_ptr<View> view)
 {
@@ -59,19 +60,19 @@ void Core::loadTestLevel()
 
     auto camera = std::make_shared<Actor>();
     camera->name("camera");
-    camera->emplaceComponent<ComponentType::Camera>();
-    camera->emplaceComponent<ComponentType::Position>(WorldPoint(10, 10));
+    camera->emplace<CameraComponent>();
+    camera->emplace<PositionComponent>(WorldPoint(10, 10));
     spawn(camera);
 
     auto tree = std::make_shared<Actor>();
     tree->name("tree");
-    tree->emplaceComponent<ComponentType::Position>(WorldPoint(5, 15));
-    tree->emplaceComponent<ComponentType::Graphics>("bitmaps/tree.png");
+    tree->emplace<PositionComponent>(WorldPoint(5, 15));
+    tree->emplace<GraphicsComponent>("bitmaps/tree.png");
     spawn(tree);
 
     auto girl = std::make_shared<Actor>();
     girl->name("girl");
-    girl->emplaceComponent<ComponentType::Position>(WorldPoint(9, 12));
-    girl->emplaceComponent<ComponentType::Graphics>("animations/girl2.png");
+    girl->emplace<PositionComponent>(WorldPoint(9, 12));
+    girl->emplace<GraphicsComponent>("animations/girl2.png");
     spawn(girl);
 }
