@@ -18,17 +18,12 @@ void Core::update(double deltaSec)
 
         // Process movement
         if (movement && position) {
-            //std::cerr << "shorten: " << movement->friction <<
-            //    " accel: " << movement->acceleration.length() << std::endl;
-
             movement->velocity.shortenBy(movement->friction);
             movement->velocity += movement->acceleration;
 
             movement->velocity.clamp(movement->maxSpeed);
 
             position->position += movement->velocity;
-
-            std::cerr << "speed: " << movement->velocity.length() << std::endl;
         }
 
         // Process camera movement

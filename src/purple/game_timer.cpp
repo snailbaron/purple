@@ -1,15 +1,22 @@
 #include "game_timer.hpp"
+#include <sdl_wrapper.hpp>
 
 GameTimer::GameTimer()
-    : _prevTime(SDL_GetTicks())
+    : _prevTimeSec(SDL_GetTicks() / 1000.0)
 { }
 
 bool GameTimer::advance(double deltaSec)
 {
-    Uint32 currentTime = SDL_GetTicks();
-    if ((currentTime - _prevTime) / 1000.0 >= deltaSec) {
-        _prevTime = currentTime;
+    double currentTimeSec = SDL_GetTicks() / 1000.0;
+    if (currentTimeSec - _prevTimeSec >= deltaSec) {
+        _prevTimeSec += deltaSec;
         return true;
     }
     return false;
+}
+
+double GameTimer::delay() const
+{
+    double currentTimeSec = SDL_GetTicks() / 1000.0;
+    return currentTimeSec - _prevTimeSec;
 }

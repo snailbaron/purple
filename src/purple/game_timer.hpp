@@ -1,7 +1,5 @@
 #pragma once
 
-#include <sdl_wrapper.hpp>
-
 /**
  * A timer to perform actions in regular intervals. Stores the last moment when
  * the action was performed.
@@ -25,6 +23,8 @@ public:
      */
     bool advance(double deltaSec);
 
+    double delay() const;
+
 private:
-    Uint32 _prevTime;
+    double _prevTimeSec;
 };
