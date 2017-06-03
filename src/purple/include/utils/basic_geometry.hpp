@@ -9,6 +9,7 @@
 #include <type_traits>
 #include <tuple>
 #include <cmath>
+#include <algorithm>
 
 template <class T>
 struct Vector {
@@ -58,12 +59,23 @@ struct Vector {
     }
 
     // Limit vector length without changing direction
-    Vector& shorten(T maxLength)
+    Vector& clamp(T maxLength)
     {
         double ratio = maxLength / length();
         if (ratio < 1) {
             x *= ratio;
             y *= ratio;
+        }
+        return *this;
+    }
+
+    Vector& shortenBy(T size)
+    {
+        double currentLength = length();
+        if (currentLength > 0) {
+            double mul = std::max(0.0, (currentLength - size) / currentLength);
+            x *= mul;
+            y *= mul;
         }
         return *this;
     }

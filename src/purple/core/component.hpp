@@ -34,15 +34,15 @@ struct ControllerComponent : Component {
 };
 
 struct MovementComponent : Component {
-    MovementComponent(double maxSpeed, double maxAcceleration, double friction)
+    MovementComponent(double maxSpeed, double acceleration, double friction)
         : maxSpeed(maxSpeed)
-        , maxAcceleration(maxAcceleration)
         , friction(friction)
+        , maxAcceleration(acceleration + friction)
     { }
 
-    WorldVector speed;
+    WorldVector velocity;
     WorldVector acceleration;
-    double maxAcceleration;
     double maxSpeed;
     double friction;
+    double maxAcceleration;
 };

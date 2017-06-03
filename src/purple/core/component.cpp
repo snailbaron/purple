@@ -13,7 +13,5 @@ void ControllerComponent::setInput(double x, double y)
         return;
     }
 
-    double maxAcc = movement->maxAcceleration;
-    movement->acceleration.x = x * maxAcc;
-    movement->acceleration.y = y * maxAcc;
+    movement->acceleration = WorldVector(x, y) * movement->maxAcceleration;
 }

@@ -2,6 +2,7 @@
 #include "tile_map.h"
 #include "component.hpp"
 #include <iostream>
+#include <algorithm>
 
 void Core::attach(std::shared_ptr<View> view)
 {
@@ -16,21 +17,18 @@ void Core::update(double deltaSec)
         auto camera = actor->get<CameraComponent>();
 
         // Process movement
-        if (movement) {
-            std::cerr << movement->speed.x << ", " << movement->speed.y << std::endl;
-            movement->speed += movement->acceleration - movement->friction * movement->speed;
-            movement->speed.shorten(movement->maxSpeed);
-            if (movement->speed.length() < 0.001) {
-                movement->speed = {0, 0};
-            }
+        if (movement && position) {
+            //std::cerr << "shorten: " << movement->friction <<
+            //    " accel: " << movement->acceleration.length() << std::endl;
 
-            if (movement->speed.length() > 0) {
-                auto position = actor->get<PositionComponent>();
-                if (position) {
-                    position->position += movement->speed;
+            movement->velocity.shortenBy(movement->friction);
+            movement->velocity += movement->acceleration;
 
-                }
-            }
+            movement->velocity.clamp(movement->maxSpeed);
+
+            position->position += movement->velocity;
+
+            std::cerr << "speed: " << movement->velocity.length() << std::endl;
         }
 
         // Process camera movement
@@ -106,7 +104,7 @@ void Core::loadTestLevel()
     girl->name("girl");
     girl->emplace<PositionComponent>(WorldPoint(9, 12));
     girl->emplace<GraphicsComponent>("animations/girl2.png");
-    girl->emplace<MovementComponent>(0.1, 0.05, 0.1);
+    girl->emplace<MovementComponent>(0.1, 0.005, 0.007);
     girl->emplace<ControllerComponent>();
     spawn(girl);
 

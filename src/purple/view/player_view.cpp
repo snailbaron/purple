@@ -99,11 +99,5 @@ Vector<double> PlayerView::motionInput(int mouseX, int mouseY) const
     Vector<double> offset = {
         1.0 * mouseX - _canvas.middle().x,
         1.0 * mouseY - _canvas.middle().y };
-
-    int minCanvasSize =
-        std::min(_canvas.size().x, _canvas.size().y);
-    double maxSpeedRadius = minCanvasSize / 2.0;
-    offset.shorten(maxSpeedRadius);
-
-    return offset / minCanvasSize;
+    return normalized(offset);
 }
