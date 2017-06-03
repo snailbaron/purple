@@ -10,17 +10,34 @@ void Core::attach(std::shared_ptr<View> view)
 
 void Core::update(double deltaSec)
 {
-    // Process movement
     for (auto actor : _actors) {
         auto movement = actor->get<MovementComponent>();
+        auto position = actor->get<PositionComponent>();
+        auto camera = actor->get<CameraComponent>();
+
+        // Process movement
         if (movement) {
             std::cerr << movement->speed.x << ", " << movement->speed.y << std::endl;
-            movement->speed += movement->acceleration;
+            movement->speed += movement->acceleration - movement->friction * movement->speed;
             movement->speed.shorten(movement->maxSpeed);
+            if (movement->speed.length() < 0.001) {
+                movement->speed = {0, 0};
+            }
 
-            auto position = actor->get<PositionComponent>();
-            if (position) {
-                position->position += movement->speed;
+            if (movement->speed.length() > 0) {
+                auto position = actor->get<PositionComponent>();
+                if (position) {
+                    position->position += movement->speed;
+
+                }
+            }
+        }
+
+        // Process camera movement
+        if (position && camera) {
+            auto follow = camera->followPosition.lock();
+            if (follow) {
+                position->position = follow->position;
             }
         }
     }
@@ -79,12 +96,6 @@ void Core::loadTestLevel()
 
     notifyViews(&View::onTilesLoaded, tileMap);
 
-    auto camera = std::make_shared<Actor>();
-    camera->name("camera");
-    camera->emplace<CameraComponent>();
-    camera->emplace<PositionComponent>(WorldPoint(10, 10));
-    spawn(camera);
-
     auto tree = std::make_shared<Actor>();
     tree->name("tree");
     tree->emplace<PositionComponent>(WorldPoint(5, 15));
@@ -95,7 +106,14 @@ void Core::loadTestLevel()
     girl->name("girl");
     girl->emplace<PositionComponent>(WorldPoint(9, 12));
     girl->emplace<GraphicsComponent>("animations/girl2.png");
-    girl->emplace<MovementComponent>(10.0, 5.0);
+    girl->emplace<MovementComponent>(0.1, 0.05, 0.1);
     girl->emplace<ControllerComponent>();
     spawn(girl);
+
+    auto camera = std::make_shared<Actor>();
+    camera->name("camera");
+    camera->emplace<CameraComponent>(girl->get<PositionComponent>());
+    camera->emplace<PositionComponent>(WorldPoint(10, 10));
+    spawn(camera);
+
 }

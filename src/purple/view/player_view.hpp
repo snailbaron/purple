@@ -1,9 +1,9 @@
 #pragma once
 
 #include "view.hpp"
-#include "canvas.hpp"
+#include "canvas/canvas.hpp"
 #include "resources.hpp"
-#include "scene.hpp"
+#include "scene/scene.hpp"
 #include "../core/tile_map.h"
 #include <map>
 #include <memory>

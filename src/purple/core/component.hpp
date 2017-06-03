@@ -24,6 +24,9 @@ struct GraphicsComponent : Component {
 };
 
 struct CameraComponent : Component {
+    CameraComponent(std::weak_ptr<PositionComponent> followPosition)
+        : followPosition(followPosition) {}
+    std::weak_ptr<PositionComponent> followPosition;
 };
 
 struct ControllerComponent : Component {
@@ -31,11 +34,15 @@ struct ControllerComponent : Component {
 };
 
 struct MovementComponent : Component {
-    MovementComponent(double maxSpeed, double maxAcceleration)
-        : maxSpeed(maxSpeed), maxAcceleration(maxAcceleration) {}
+    MovementComponent(double maxSpeed, double maxAcceleration, double friction)
+        : maxSpeed(maxSpeed)
+        , maxAcceleration(maxAcceleration)
+        , friction(friction)
+    { }
 
     WorldVector speed;
     WorldVector acceleration;
     double maxAcceleration;
     double maxSpeed;
+    double friction;
 };

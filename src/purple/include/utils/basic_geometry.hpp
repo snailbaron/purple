@@ -179,6 +179,12 @@ bool operator>=(const Vector<T>& left, const Vector<T>& right)
     return right <= left;
 }
 
+template <class T>
+Vector<T> normalized(const Vector<T>& vec)
+{
+    return vec / vec.length();
+}
+
 //
 // static_cast analog for vectors
 // TODO: Some zero-copy thingy for trivial T1==T2 case?
@@ -192,4 +198,3 @@ Vector<T1> staticVectorCast(const Vector<T2>& source)
         static_cast<T1>(source.y)
     };
 }
-

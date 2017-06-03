@@ -1,5 +1,6 @@
 #include "player_view.hpp"
 #include <algorithm>
+#include <utility>
 
 namespace {
 
@@ -74,10 +75,11 @@ void PlayerView::onActorSpawn(std::shared_ptr<Actor> actor)
     auto camera = actor->get<CameraComponent>();
 
     if (position && camera) {
-        _scene.positionCamera(position->position);
+        _scene.positionCamera(position);
     } else if (position && graphics) {
-        _scene.placeGraphics(
-            position->position, _resources.graphics(graphics->graphics)); // <-- madness, do something about it
+        auto graphicsResource = _resources.graphics(graphics->graphics);
+        auto graphics = graphicsResource->createGraphics();
+        _scene.placeSceneObject(position, std::move(graphics));
     }
 }
 

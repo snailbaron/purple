@@ -1,52 +1,53 @@
 #pragma once
 
-#include "canvas.hpp"
-#include <utils/variation.hpp>
+#include "canvas/canvas.hpp"
+#include "canvas/graphics.hpp"
 #include <sdl_wrapper.hpp>
 #include <map>
 #include <string>
 #include <memory>
 
-enum class ResourceType {
-    Bitmap,
-    Animation,
+class Resource {
 };
 
-IMPLEMENT_VARIATION(Resource, ResourceType)
+class GraphicsResource : public Resource {
+public:
+    virtual std::unique_ptr<Graphics> createGraphics() const = 0;
+};
 
-//using NAME = Variation<ResourceType>;
-//
-//template <ResourceType ProvidedResourceType>
-//    using ResourceOf =
-//        typename VariationOf<ResourceType, ProvidedResourceType>;
-
-#define RESOURCE(NAME) NEW_VARIATION(NAME ## Resource, ResourceType, ResourceType:: NAME)
-
-RESOURCE(Bitmap) {
+class BitmapResource : public GraphicsResource {
+public:
     BitmapResource(std::shared_ptr<sdl::Texture> texture, int width, int height)
-        : texture(texture), width(width), height(height) {}
+        : _texture(texture), _width(width), _height(height) {}
 
-    std::shared_ptr<sdl::Texture> texture;
-    int width;
-    int height;
+    std::unique_ptr<Graphics> createGraphics() const override;
+
+private:
+    std::shared_ptr<sdl::Texture> _texture;
+    int _width;
+    int _height;
 };
 
-RESOURCE(Animation) {
+class AnimationResource : public GraphicsResource {
+public:
     AnimationResource(
             std::shared_ptr<sdl::Texture> texture,
             int frameWidth,
             int frameHeight,
             int frameCount)
-        : texture(texture)
-        , frameWidth(frameWidth)
-        , frameHeight(frameHeight)
-        , frameCount(frameCount)
+        : _texture(texture)
+        , _frameWidth(frameWidth)
+        , _frameHeight(frameHeight)
+        , _frameCount(frameCount)
     { }
 
-    std::shared_ptr<sdl::Texture> texture;
-    int frameWidth;
-    int frameHeight;
-    int frameCount;
+    std::unique_ptr<Graphics> createGraphics() const override;
+
+private:
+    std::shared_ptr<sdl::Texture> _texture;
+    int _frameWidth;
+    int _frameHeight;
+    int _frameCount;
 };
 
 class ResourceStorage {
@@ -54,7 +55,7 @@ public:
     void loadGraphics(const Canvas& canvas, const std::string& location);
     void loadTestLevel();
 
-    std::shared_ptr<Resource> graphics(const std::string& key) const;
+    std::shared_ptr<GraphicsResource> graphics(const std::string& key) const;
 
 private:
     std::shared_ptr<BitmapResource> loadBitmapResource(
@@ -62,5 +63,5 @@ private:
     std::shared_ptr<AnimationResource> loadAnimationResource(
         const Canvas& canvas, const std::string& path);
 
-    std::map<std::string, std::shared_ptr<Resource>> _graphicalResources;
+    std::map<std::string, std::shared_ptr<GraphicsResource>> _graphicalResources;
 };

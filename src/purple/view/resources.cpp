@@ -4,7 +4,19 @@
 
 namespace fs = std::experimental::filesystem;
 
-std::shared_ptr<Resource> ResourceStorage::graphics(const std::string& key) const
+std::unique_ptr<Graphics> BitmapResource::createGraphics() const
+{
+    return std::make_unique<Sprite>(_texture, _width, _height);
+}
+
+std::unique_ptr<Graphics> AnimationResource::createGraphics() const
+{
+    return std::make_unique<Animation>(
+        _texture, _frameWidth, _frameHeight, _frameCount, 3);
+}
+
+std::shared_ptr<GraphicsResource> ResourceStorage::graphics(
+    const std::string& key) const
 {
     auto i = _graphicalResources.find(key);
     if (i == _graphicalResources.end()) {
