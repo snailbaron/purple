@@ -237,7 +237,6 @@ copy /Y "%sdl_ttf_dir%SDL2_ttf.dll" "$(OutDir)" &gt;NUL
     <ClCompile Include="core\component.cpp" />
     <ClCompile Include="core\core.cpp" />
     <ClCompile Include="core\tile_map.cpp" />
-    <ClCompile Include="event_queue.cpp" />
     <ClCompile Include="game_timer.cpp" />
     <ClCompile Include="view\canvas\graphics.cpp" />
     <ClCompile Include="view\geometry.cpp" />
@@ -262,8 +261,6 @@ copy /Y "%sdl_ttf_dir%SDL2_ttf.dll" "$(OutDir)" &gt;NUL
     <ClInclude Include="core\core.hpp" />
     <ClInclude Include="core\geometry.hpp" />
     <ClInclude Include="core\tile_map.h" />
-    <ClInclude Include="events.hpp" />
-    <ClInclude Include="event_queue.hpp" />
     <ClInclude Include="game_timer.hpp" />
     <ClInclude Include="include\sdl_wrapper.hpp" />
     <ClInclude Include="include\sdl_wrapper\sdl.hpp" />
@@ -282,7 +279,6 @@ copy /Y "%sdl_ttf_dir%SDL2_ttf.dll" "$(OutDir)" &gt;NUL
     <ClInclude Include="sdl_wrapper\sdl_ttf_impl.hpp" />
     <ClInclude Include="sdl_wrapper\surface_impl.hpp" />
     <ClInclude Include="sdl_wrapper\video_impl.hpp" />
-    <ClInclude Include="include\utils\variation.hpp" />
     <ClInclude Include="view\canvas\canvas.hpp" />
     <ClInclude Include="view\geometry.hpp" />
     <ClInclude Include="view\canvas\graphics.hpp" />

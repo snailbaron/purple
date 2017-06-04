@@ -48,9 +48,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="event_queue.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="view\log_view.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -150,15 +147,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sdl_wrapper.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="events.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\utils\variation.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="event_queue.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="view\resources.hpp">
