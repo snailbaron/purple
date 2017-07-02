@@ -9,10 +9,11 @@ Sprite::Sprite(std::shared_ptr<sdl::Texture> texture, int width, int height)
 
 void Sprite::render(Canvas& canvas, const ScreenPoint& position)
 {
+    
     canvas.drawTexture(
         _texture,
-        {0, 0, _width, _height},
-        {position.x - _width / 2, position.y - _height / 2, _width, _height});
+        SDL_Rect{0, 0, _width, _height},
+        SDL_Rect{position.x - _width / 2, position.y - _height / 2, _width, _height});
 }
 
 Animation::Animation(

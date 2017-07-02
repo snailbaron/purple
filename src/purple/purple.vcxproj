@@ -72,22 +72,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)..\bin\windows-$(PlatformTarget)-$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)..\build\windows-$(PlatformTarget)-$(Configuration)\</IntDir>
+    <IntDir>$(SolutionDir)..\build\windows-$(PlatformTarget)-$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)..\bin\windows-$(PlatformTarget)-$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)..\build\windows-$(PlatformTarget)-$(Configuration)\</IntDir>
+    <IntDir>$(SolutionDir)..\build\windows-$(PlatformTarget)-$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)..\bin\windows-$(PlatformTarget)-$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)..\build\windows-$(PlatformTarget)-$(Configuration)\</IntDir>
+    <IntDir>$(SolutionDir)..\build\windows-$(PlatformTarget)-$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)..\bin\windows-$(PlatformTarget)-$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)..\build\windows-$(PlatformTarget)-$(Configuration)\</IntDir>
+    <IntDir>$(SolutionDir)..\build\windows-$(PlatformTarget)-$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">
     <ClCompile>
@@ -96,14 +96,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\lib\SDL2-2.0.5\include;$(SolutionDir)..\lib\SDL2_image-2.0.1\include;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\include;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(SolutionDir)..\src\sdl_wrapper\include\;$(SolutionDir)..\lib\SDL2-2.0.5\include;$(SolutionDir)..\lib\SDL2_image-2.0.1\include;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\lib\SDL2-2.0.5\lib\$(PlatformTarget)\;$(SolutionDir)..\lib\SDL2_image-2.0.1\lib\$(PlatformTarget)\;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\lib\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\lib\SDL2-2.0.5\lib\$(PlatformTarget)\;$(SolutionDir)..\lib\SDL2_image-2.0.1\lib\$(PlatformTarget)\;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\lib\$(PlatformTarget)\;$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;sdl_wrapper.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>set "sdl_dir=$(SolutionDir)..\lib\SDL2-2.0.5\lib\x86\"
@@ -130,14 +130,14 @@ copy /Y "%sdl_ttf_dir%SDL2_ttf.dll" "$(OutDir)" &gt;NUL
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\lib\SDL2-2.0.5\include;$(SolutionDir)..\lib\SDL2_image-2.0.1\include;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\include;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(SolutionDir)..\src\sdl_wrapper\include\;$(SolutionDir)..\lib\SDL2-2.0.5\include;$(SolutionDir)..\lib\SDL2_image-2.0.1\include;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\lib\SDL2-2.0.5\lib\$(PlatformTarget)\;$(SolutionDir)..\lib\SDL2_image-2.0.1\lib\$(PlatformTarget)\;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\lib\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\lib\SDL2-2.0.5\lib\$(PlatformTarget)\;$(SolutionDir)..\lib\SDL2_image-2.0.1\lib\$(PlatformTarget)\;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\lib\$(PlatformTarget)\;$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;sdl_wrapper.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>set "sdl_dir=$(SolutionDir)..\lib\SDL2-2.0.5\lib\x86\"
@@ -166,7 +166,7 @@ copy /Y "%sdl_ttf_dir%SDL2_ttf.dll" "$(OutDir)" &gt;NUL
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\lib\SDL2-2.0.5\include;$(SolutionDir)..\lib\SDL2_image-2.0.1\include;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\include;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(SolutionDir)..\src\sdl_wrapper\include\;$(SolutionDir)..\lib\SDL2-2.0.5\include;$(SolutionDir)..\lib\SDL2_image-2.0.1\include;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
     </ClCompile>
     <Link>
@@ -174,8 +174,8 @@ copy /Y "%sdl_ttf_dir%SDL2_ttf.dll" "$(OutDir)" &gt;NUL
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\lib\SDL2-2.0.5\lib\$(PlatformTarget)\;$(SolutionDir)..\lib\SDL2_image-2.0.1\lib\$(PlatformTarget)\;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\lib\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\lib\SDL2-2.0.5\lib\$(PlatformTarget)\;$(SolutionDir)..\lib\SDL2_image-2.0.1\lib\$(PlatformTarget)\;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\lib\$(PlatformTarget)\;$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;sdl_wrapper.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>set "sdl_dir=$(SolutionDir)..\lib\SDL2-2.0.5\lib\x86\"
@@ -204,7 +204,7 @@ copy /Y "%sdl_ttf_dir%SDL2_ttf.dll" "$(OutDir)" &gt;NUL
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\lib\SDL2-2.0.5\include;$(SolutionDir)..\lib\SDL2_image-2.0.1\include;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\include;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(SolutionDir)..\src\sdl_wrapper\include\;$(SolutionDir)..\lib\SDL2-2.0.5\include;$(SolutionDir)..\lib\SDL2_image-2.0.1\include;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
     </ClCompile>
     <Link>
@@ -212,8 +212,8 @@ copy /Y "%sdl_ttf_dir%SDL2_ttf.dll" "$(OutDir)" &gt;NUL
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\lib\SDL2-2.0.5\lib\$(PlatformTarget)\;$(SolutionDir)..\lib\SDL2_image-2.0.1\lib\$(PlatformTarget)\;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\lib\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\lib\SDL2-2.0.5\lib\$(PlatformTarget)\;$(SolutionDir)..\lib\SDL2_image-2.0.1\lib\$(PlatformTarget)\;$(SolutionDir)..\lib\SDL2_ttf-2.0.14\lib\$(PlatformTarget)\;$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;sdl_wrapper.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>set "sdl_dir=$(SolutionDir)..\lib\SDL2-2.0.5\lib\x86\"
@@ -242,13 +242,6 @@ copy /Y "%sdl_ttf_dir%SDL2_ttf.dll" "$(OutDir)" &gt;NUL
     <ClCompile Include="view\geometry.cpp" />
     <ClCompile Include="view\log_view.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="sdl_wrapper\errors.cpp" />
-    <ClCompile Include="sdl_wrapper\render_impl.cpp" />
-    <ClCompile Include="sdl_wrapper\sdl.cpp" />
-    <ClCompile Include="sdl_wrapper\sdl_image.cpp" />
-    <ClCompile Include="sdl_wrapper\sdl_ttf_impl.cpp" />
-    <ClCompile Include="sdl_wrapper\surface_impl.cpp" />
-    <ClCompile Include="sdl_wrapper\video_impl.cpp" />
     <ClCompile Include="view\canvas\canvas.cpp" />
     <ClCompile Include="view\player_view.cpp" />
     <ClCompile Include="view\resources.cpp" />
@@ -262,23 +255,10 @@ copy /Y "%sdl_ttf_dir%SDL2_ttf.dll" "$(OutDir)" &gt;NUL
     <ClInclude Include="core\geometry.hpp" />
     <ClInclude Include="core\tile_map.h" />
     <ClInclude Include="game_timer.hpp" />
-    <ClInclude Include="include\sdl_wrapper.hpp" />
-    <ClInclude Include="include\sdl_wrapper\sdl.hpp" />
-    <ClInclude Include="include\sdl_wrapper\sdl\render.hpp" />
-    <ClInclude Include="include\sdl_wrapper\sdl\surface.hpp" />
-    <ClInclude Include="include\sdl_wrapper\sdl\utils.hpp" />
-    <ClInclude Include="include\sdl_wrapper\sdl\video.hpp" />
-    <ClInclude Include="include\sdl_wrapper\sdl_image.hpp" />
-    <ClInclude Include="include\sdl_wrapper\sdl_ttf.hpp" />
     <ClInclude Include="include\utils\basic_geometry.hpp" />
     <ClInclude Include="include\utils\mix.hpp" />
     <ClInclude Include="include\utils\singleton.hpp" />
     <ClInclude Include="sdl_wrapper.hpp" />
-    <ClInclude Include="sdl_wrapper\errors.hpp" />
-    <ClInclude Include="sdl_wrapper\render_impl.hpp" />
-    <ClInclude Include="sdl_wrapper\sdl_ttf_impl.hpp" />
-    <ClInclude Include="sdl_wrapper\surface_impl.hpp" />
-    <ClInclude Include="sdl_wrapper\video_impl.hpp" />
     <ClInclude Include="view\canvas\canvas.hpp" />
     <ClInclude Include="view\geometry.hpp" />
     <ClInclude Include="view\canvas\graphics.hpp" />

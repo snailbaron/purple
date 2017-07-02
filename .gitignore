@@ -1,6 +1,7 @@
 /bin/
 /build/
 /import/
+Debug/
 .vs/
 *.VC.VC.opendb
 *.VC.db

@@ -24,8 +24,8 @@ Canvas::Canvas()
 
 ScreenSize Canvas::size() const
 {
-    std::tuple<int, int> windowSize = _window->size();
-    return {std::get<0>(windowSize), std::get<1>(windowSize)};
+    sdl::Size windowSize = _window->size();
+    return {windowSize.w, windowSize.h};
 }
 
 ScreenPoint Canvas::middle() const
