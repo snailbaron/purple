@@ -2,20 +2,24 @@
 
 SceneGraphics::SceneGraphics(
     std::shared_ptr<PositionComponent> position,
-    std::unique_ptr<Graphics>&& graphics)
+    std::unique_ptr<Visual>&& graphics)
     : _position(position)
     , _graphics(std::move(graphics))
 { }
 
 void SceneGraphics::render(
-    Canvas& canvas, const WorldPoint& cameraPosition) const
+    Renderer& renderer, const WorldPoint& cameraPosition) const
 {
+    ScreenPoint rendererMiddle(
+        renderer.size().width / 2,
+        renderer.size().height / 2);
+
     ScreenOffset screenTopLeft =
-        worldToScreenOffset(cameraPosition) - canvas.middle();
+        worldToScreenOffset(cameraPosition) - rendererMiddle;
     WorldOffset worldOffset = _position->position - cameraPosition;
     ScreenOffset screenOffset = worldToScreenOffset(worldOffset);
-    ScreenPoint screenPosition = canvas.middle() + screenOffset;
-    _graphics->render(canvas, screenPosition);
+    ScreenPoint screenPosition = rendererMiddle + screenOffset;
+    _graphics->render(renderer, screenPosition);
 }
 
 void SceneGraphics::update(double deltaSec)

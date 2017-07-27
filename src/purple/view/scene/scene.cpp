@@ -1,5 +1,5 @@
 #include "scene.hpp"
-#include "../core/geometry.hpp"
+#include "purple/core/geometry.hpp"
 #include <string>
 #include <cmath>
 #include <algorithm>
@@ -13,20 +13,21 @@ void SceneTiles::loadTiles(
     for (size_t y = 0; y < _height; y++) {
         for (size_t x = 0; x < _width; x++) {
             auto resource = resources.graphics(tileMap.tile(x, y).graphics);
-            std::unique_ptr<Graphics> graphics = resource->createGraphics();
+            std::unique_ptr<Visual> graphics = resource->createGraphics();
             _tileGraphics.push_back(std::move(graphics));
         }
     }
 }
 
-void SceneTiles::render(Canvas& canvas, const ScreenOffset& screenOffset) const
+void SceneTiles::render(Renderer& renderer, const ScreenOffset& screenOffset) const
 {
     // TODO: Just rewrite this.
 
     int screenStartX = screenOffset.x;
     int screenStartY = screenOffset.y;
-    int screenEndX = screenOffset.x + canvas.size().x - 1;
-    int screenEndY = screenOffset.y + canvas.size().y - 1;
+
+    int screenEndX = screenOffset.x + renderer.size().width - 1;
+    int screenEndY = screenOffset.y + renderer.size().height - 1;
 
     int tileStartX = screenStartX / _tileSize.x;
     int tileStartY = screenStartY / _tileSize.y;
@@ -49,7 +50,7 @@ void SceneTiles::render(Canvas& canvas, const ScreenOffset& screenOffset) const
             int bitmapX = bitmapStartX + xOffset * _tileSize.x;
             int bitmapY = bitmapStartY + yOffset * _tileSize.y;
 
-            _tileGraphics[y * _height + x]->render(canvas, {bitmapX, bitmapY});
+            _tileGraphics[y * _height + x]->render(renderer, {bitmapX, bitmapY});
         }
     }
 }
@@ -66,20 +67,24 @@ void Scene::update(double deltaSec)
     }
 }
 
-void Scene::render(Canvas& canvas) const
+void Scene::render(Renderer& renderer) const
 {
+    ScreenPoint rendererMiddle(
+        renderer.size().width / 2,
+        renderer.size().height / 2);
+
     ScreenOffset screenTopLeft =
-        worldToScreenOffset(_cameraPosition->position) - canvas.middle();
-    _tileLayer.render(canvas, screenTopLeft);
+        worldToScreenOffset(_cameraPosition->position) - rendererMiddle;
+    _tileLayer.render(renderer, screenTopLeft);
 
     for (const auto& object : _objects) {
-        object->render(canvas, _cameraPosition->position);
+        object->render(renderer, _cameraPosition->position);
     }
 }
 
 void Scene::placeSceneObject(
     std::shared_ptr<PositionComponent> position,
-    std::unique_ptr<Graphics>&& graphics)
+    std::unique_ptr<Visual>&& graphics)
 {
     _objects.push_back(std::make_unique<SceneGraphics>(
         position, std::move(graphics)));

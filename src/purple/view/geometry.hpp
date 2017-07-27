@@ -1,7 +1,7 @@
 #pragma once
 
-#include <utils/basic_geometry.hpp>
-#include "../core/geometry.hpp"
+#include <purple/utils/basic_geometry.hpp>
+#include <purple/core/geometry.hpp>
 
 // There is currently no difference between a point and an offset/size. We may
 // try to change it in the future.

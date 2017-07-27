@@ -15,63 +15,19 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="core\core.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="view\player_view.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game_timer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="view\log_view.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="view\resources.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="view\geometry.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="core\tile_map.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="core\component.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="view\canvas\canvas.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="view\canvas\graphics.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="view\scene\scene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="view\scene\objects.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="core\actor.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="core\component.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="core\core.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\geometry.hpp">
+    <ClInclude Include="view\scene\objects.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\utils\basic_geometry.hpp">
+    <ClInclude Include="view\scene\scene.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\utils\singleton.hpp">
+    <ClInclude Include="view\geometry.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="view\log_view.hpp">
@@ -80,38 +36,88 @@
     <ClInclude Include="view\player_view.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="view\resources.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="view\view.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="game_timer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sdl_wrapper.hpp">
+    <ClInclude Include="view\renderer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="view\resources.hpp">
+    <ClInclude Include="include\purple\core\component.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="view\geometry.hpp">
+    <ClInclude Include="include\purple\core\tile_map.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\tile_map.h">
+    <ClInclude Include="include\purple\config.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\utils\mix.hpp">
+    <ClInclude Include="include\purple\utils\basic_geometry.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="view\canvas\canvas.hpp">
+    <ClInclude Include="include\purple\utils\mix.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="view\canvas\graphics.hpp">
+    <ClInclude Include="include\purple\utils\singleton.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="view\scene\scene.hpp">
+    <ClInclude Include="view\exceptions.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="view\scene\objects.hpp">
+    <ClInclude Include="include\purple\exceptions.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="view\visual.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\purple\core\geometry.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="core\component.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\core.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\tile_map.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="view\scene\objects.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="view\scene\scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="view\geometry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="view\log_view.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="view\player_view.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="view\resources.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game_timer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="view\renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="view\visual.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

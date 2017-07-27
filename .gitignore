@@ -1,7 +1,8 @@
+/3p/
 /bin/
 /build/
 /import/
-Debug/
+/tmp/
 .vs/
 *.VC.VC.opendb
 *.VC.db

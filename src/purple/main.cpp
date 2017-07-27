@@ -4,8 +4,6 @@
 #include "game_timer.hpp"
 #include "core/actor.hpp"
 
-#include <sdl_wrapper.hpp>
-
 #include <iostream>
 #include <exception>
 #include <memory>

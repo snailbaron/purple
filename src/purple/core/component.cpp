@@ -1,4 +1,4 @@
-#include "component.hpp"
+#include <purple/core/component.hpp>
 #include "actor.hpp"
 
 void ControllerComponent::setInput(double x, double y)

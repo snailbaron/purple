@@ -9,7 +9,7 @@ Color BACKGROUND_COLOR { 100, 100, 100 };
 }
 
 PlayerView::PlayerView()
-    : _canvas()
+    : _renderer()
 {
 }
 
@@ -49,7 +49,7 @@ bool PlayerView::processInput()
 
 void PlayerView::loadResources()
 {
-    _resources.loadGraphics(_canvas, "../../assets");
+    _resources.loadGraphics(_renderer, "../../assets");
 }
 
 void PlayerView::update(double deltaSec)
@@ -59,9 +59,9 @@ void PlayerView::update(double deltaSec)
 
 void PlayerView::render()
 {
-    _canvas.clear(BACKGROUND_COLOR);
-    _scene.render(_canvas);
-    _canvas.present();
+    _renderer.clear(BACKGROUND_COLOR);
+    _scene.render(_renderer);
+    _renderer.present();
 }
 
 //
@@ -96,8 +96,11 @@ void PlayerView::onControllerSpawn(
 
 Vector<double> PlayerView::motionInput(int mouseX, int mouseY) const
 {
+    ScreenPoint rendererMiddle {
+        _renderer.size().width / 2, _renderer.size().height / 2};
+
     Vector<double> offset = {
-        1.0 * mouseX - _canvas.middle().x,
-        1.0 * mouseY - _canvas.middle().y };
+        1.0 * mouseX - rendererMiddle.x,
+        1.0 * mouseY - rendererMiddle.y };
     return normalized(offset);
 }

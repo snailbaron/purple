@@ -1,7 +1,7 @@
 #pragma once
 
-#include "component.hpp"
-#include <utils/mix.hpp>
+#include <purple/core/component.hpp>
+#include <purple/utils/mix.hpp>
 #include <string>
 #include <vector>
 #include <memory>

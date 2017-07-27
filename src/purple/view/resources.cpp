@@ -1,15 +1,41 @@
 #include "resources.hpp"
+#include "exceptions.hpp"
+
+#include <SDL_image.h>
+
 #include <filesystem>
 #include <stdexcept>
 
 namespace fs = std::experimental::filesystem;
 
-std::unique_ptr<Graphics> BitmapResource::createGraphics() const
+namespace {
+
+std::shared_ptr<Texture> makeTexture(const Image& image, const Renderer& renderer)
+{
+    SDL_Texture* rawTexture =
+        SDL_CreateTextureFromSurface(renderer.raw(), image.raw());
+    checkSdlCall("SDL_CreateTextureFromSurface", rawTexture);
+
+    return std::make_shared<Texture>(rawTexture);
+}
+
+} // namespace
+
+Image::Image(const std::string& filePath)
+    : _sdlSurface(nullptr, SDL_FreeSurface)
+{
+    SDL_Surface* rawSurface = IMG_Load(filePath.c_str());
+    checkImgCall("IMG_Load", rawSurface);
+
+    _sdlSurface.reset(rawSurface);
+}
+
+std::unique_ptr<Visual> BitmapResource::createGraphics() const
 {
     return std::make_unique<Sprite>(_texture, _width, _height);
 }
 
-std::unique_ptr<Graphics> AnimationResource::createGraphics() const
+std::unique_ptr<Visual> AnimationResource::createGraphics() const
 {
     return std::make_unique<Animation>(
         _texture, _frameWidth, _frameHeight, _frameCount, 3);
@@ -27,7 +53,7 @@ std::shared_ptr<GraphicsResource> ResourceStorage::graphics(
     return i->second;
 }
 
-void ResourceStorage::loadGraphics(const Canvas& canvas, const std::string& location)
+void ResourceStorage::loadGraphics(const Renderer& canvas, const std::string& location)
 {
     fs::path basePath = location;
 
@@ -62,26 +88,26 @@ void ResourceStorage::loadTestLevel()
 }
 
 std::shared_ptr<BitmapResource> ResourceStorage::loadBitmapResource(
-    const Canvas& canvas, const std::string& path)
+    const Renderer& renderer, const std::string& path)
 {
-    auto surface = img::load(path);
-    auto texture = canvas.createTextureFromSurface(surface);
+    Image image(path);
+    auto texture = makeTexture(image, renderer);
     return std::make_shared<BitmapResource>(
-        texture, surface->w(), surface->h());
+        texture, image.width(), image.height());
 }
 
 std::shared_ptr<AnimationResource> ResourceStorage::loadAnimationResource(
-    const Canvas& canvas, const std::string& path)
+    const Renderer& renderer, const std::string& path)
 {
-    auto surface = img::load(path);
-    auto texture = canvas.createTextureFromSurface(surface);
+    Image image(path);
+    auto texture = makeTexture(image, renderer);
 
     // Gross hack: assume that the animation is stored frame-by-frame
     // horizontally in a flat graphics file; assume that each frame is a seuqre.
     // No error checking.
-    int frameCount = surface->w() / surface->h();
+    int frameCount = image.width() / image.height();
 
     return std::make_shared<AnimationResource>(
-        texture, surface->h(), surface->h(), frameCount);
+        texture, image.height(), image.height(), frameCount);
 }
 

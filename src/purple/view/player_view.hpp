@@ -1,10 +1,10 @@
 #pragma once
 
 #include "view.hpp"
-#include "canvas/canvas.hpp"
+#include "renderer.hpp"
 #include "resources.hpp"
 #include "scene/scene.hpp"
-#include "../core/tile_map.h"
+#include "purple/core/tile_map.h"
 #include <map>
 #include <memory>
 #include <unordered_map>
@@ -30,7 +30,7 @@ public:
 private:
     Vector<double> motionInput(int mouseX, int mouseY) const;
 
-    Canvas _canvas;
+    Renderer _renderer;
     ResourceStorage _resources;
     Scene _scene;
     std::weak_ptr<ControllerComponent> _controller;

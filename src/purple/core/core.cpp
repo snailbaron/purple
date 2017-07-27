@@ -1,6 +1,6 @@
 #include "core.hpp"
-#include "tile_map.h"
-#include "component.hpp"
+#include <purple/core/tile_map.h>
+#include <purple/core/component.hpp>
 #include <iostream>
 #include <algorithm>
 

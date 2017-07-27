@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../core/actor.hpp"
-#include "../core/tile_map.h"
+#include "purple/core/tile_map.h"
 #include <memory>
 
 class View {
