@@ -5,11 +5,15 @@
 #include "resources.hpp"
 #include "scene/scene.hpp"
 #include "purple/core/tile_map.h"
+#include <purple/input/input.hpp>
 #include <map>
 #include <memory>
 #include <unordered_map>
 
-class PlayerView : public View {
+class PlayerView
+    : public View
+    , public Listener<input::ButtonEvent>
+    , public Listener<input::PointerMotionEvent> {
 public:
     PlayerView();
 
@@ -19,8 +23,7 @@ public:
     void onControllerSpawn(
         std::shared_ptr<ControllerComponent> controller) override;
 
-    // User input
-    bool processInput();
+    void subscribeToInput(input::InputManager& inputManager);
 
     void loadResources();
 
@@ -28,10 +31,14 @@ public:
     void render() override;
 
 private:
+    void listen(const input::ButtonEvent& buttonEvent) override;
+    void listen(const input::PointerMotionEvent& pointerMotionEvent) override;
+
     Vector<double> motionInput(int mouseX, int mouseY) const;
 
     Renderer _renderer;
     ResourceStorage _resources;
     Scene _scene;
     std::weak_ptr<ControllerComponent> _controller;
+    bool _controllerStateDown = false;
 };

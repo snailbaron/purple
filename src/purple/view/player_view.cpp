@@ -13,38 +13,40 @@ PlayerView::PlayerView()
 {
 }
 
-bool PlayerView::processInput()
+// TODO: Subscribe controller directly to input? Should be nice.
+
+void PlayerView::listen(const input::ButtonEvent& buttonEvent)
 {
-    SDL_Event evt;
-    while (SDL_PollEvent(&evt)) {
-        if (evt.type == SDL_QUIT) {
-            return false;
-        } else if (evt.type == SDL_MOUSEBUTTONDOWN &&
-                evt.button.button == SDL_BUTTON_RIGHT) {
-            auto controller = _controller.lock();
-            if (controller) {
-                auto input = motionInput(evt.button.x, evt.button.y);
+    if (buttonEvent.button == input::Button::MouseRight) {
+        auto controller = _controller.lock();
+        if (controller) {
+            if (buttonEvent.action == input::ButtonEvent::Action::Press) {
+                auto input = motionInput(buttonEvent.x, buttonEvent.y);
                 controller->setInput(input.x, input.y);
-            }
-        } else if (
-                evt.type == SDL_MOUSEBUTTONUP &&
-                evt.button.button == SDL_BUTTON_RIGHT) {
-            auto controller = _controller.lock();
-            if (controller) {
+                _controllerStateDown = true;
+            } else {
                 controller->setInput(0, 0);
-            }
-        } else if (
-                evt.type == SDL_MOUSEMOTION &&
-                (evt.motion.state & SDL_BUTTON_RMASK)) {
-            auto controller = _controller.lock();
-            if (controller) {
-                auto input = motionInput(evt.motion.x, evt.motion.y);
-                controller->setInput(input.x, input.y);
+                _controllerStateDown = false;
             }
         }
     }
+}
 
-    return true;
+void PlayerView::listen(const input::PointerMotionEvent& event)
+{
+    if (_controllerStateDown) {
+        auto controller = _controller.lock();
+        if (controller) {
+            auto input = motionInput(event.x, event.y);
+            controller->setInput(input.x, input.y);
+        }
+    }
+}
+
+void PlayerView::subscribeToInput(input::InputManager& inputManager)
+{
+    inputManager.subscribe<input::ButtonEvent>(this);
+    inputManager.subscribe<input::PointerMotionEvent>(this);
 }
 
 void PlayerView::loadResources()
