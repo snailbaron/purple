@@ -6,6 +6,7 @@
 #include <any>
 #include <set>
 #include <tuple>
+#include <functional>
 
 class EventQueue;
 

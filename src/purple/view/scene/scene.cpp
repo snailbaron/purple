@@ -19,7 +19,7 @@ void SceneTiles::loadTiles(
     }
 }
 
-void SceneTiles::render(Renderer& renderer, const ScreenOffset& screenOffset) const
+void SceneTiles::render(Canvas& renderer, const ScreenOffset& screenOffset) const
 {
     // TODO: Just rewrite this.
 
@@ -67,7 +67,7 @@ void Scene::update(double deltaSec)
     }
 }
 
-void Scene::render(Renderer& renderer) const
+void Scene::render(Canvas& renderer) const
 {
     ScreenPoint rendererMiddle(
         renderer.size().width / 2,

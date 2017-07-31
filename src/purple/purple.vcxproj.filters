@@ -18,9 +18,6 @@
     <ClInclude Include="core\actor.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\core.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="view\scene\objects.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -43,9 +40,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="game_timer.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="view\renderer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\purple\core\component.hpp">
@@ -84,12 +78,18 @@
     <ClInclude Include="include\purple\events.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="core\game.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="view\widget.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="view\canvas.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\component.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="core\core.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="core\tile_map.cpp">
@@ -119,13 +119,19 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="view\renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="view\visual.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="input\input.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="view\canvas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="view\widget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

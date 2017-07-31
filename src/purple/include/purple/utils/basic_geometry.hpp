@@ -13,9 +13,6 @@
 
 template <class T>
 struct Vector {
-    static_assert(std::is_arithmetic<T>::value,
-        "Vector: can only wrap arithmetic types");
-
     Vector() : x(0), y(0) {}
     Vector(T x, T y) : x(x), y(y) {}
 
@@ -29,7 +26,7 @@ struct Vector {
         y += other.y;
         return *this;
     }
-    
+
     Vector& operator-=(const Vector& other)
     {
         x -= other.x;

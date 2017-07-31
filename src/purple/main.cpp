@@ -1,4 +1,4 @@
-#include "core/core.hpp"
+#include "core/game.hpp"
 #include "view/player_view.hpp"
 #include "view/log_view.hpp"
 #include "game_timer.hpp"
@@ -31,22 +31,22 @@ private:
 int main(int argc, char** argv)
 {
     try {
-        Core core;
+        Game core;
+        input::InputManager inputManager;
 
-        std::shared_ptr<PlayerView> view(new PlayerView());
+        std::shared_ptr<Terminal> view(new Terminal());
         view->loadResources();
-        core.attach(view);
+        view->attachTo(core);
+        view->subscribeToInput(inputManager);
 
         std::shared_ptr<View> logView(new LogView());
         core.attach(logView);
 
-        input::InputManager inputManager;
-        view->subscribeToInput(inputManager);
 
         GameEnder ender;
         inputManager.subscribe<input::QuitEvent>(&ender);
 
-        core.loadTestLevel();
+
 
         bool done = false;
         GameTimer timer;

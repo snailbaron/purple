@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../renderer.hpp"
+#include "../canvas.hpp"
 #include "../visual.hpp"
 
 #include <purple/core/component.hpp>
@@ -8,7 +8,7 @@
 class SceneObject {
 public:
     virtual void render(
-        Renderer& canvas, const WorldPoint& cameraPosition) const = 0;
+        Canvas& canvas, const WorldPoint& cameraPosition) const = 0;
     virtual void update(double deltaSec) {}
 };
 
@@ -19,7 +19,7 @@ public:
         std::unique_ptr<Visual>&& graphics);
 
     void render(
-        Renderer& canvas, const WorldPoint& cameraPosition) const override;
+        Canvas& canvas, const WorldPoint& cameraPosition) const override;
     void update(double deltaSec) override;
 
 private:

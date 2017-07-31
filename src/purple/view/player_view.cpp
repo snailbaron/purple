@@ -1,4 +1,6 @@
 #include "player_view.hpp"
+#include "layouts/main_menu_layout.hpp"
+#include "geometry.hpp"
 #include <algorithm>
 #include <utility>
 
@@ -8,16 +10,33 @@ Color BACKGROUND_COLOR { 100, 100, 100 };
 
 }
 
-PlayerView::PlayerView()
-    : _renderer()
+Terminal::Terminal()
+    : _canvas()
+{ }
+
+void Terminal::listen(const GameStartedEvent&)
 {
+    _widgets.contents({
+        std::make_unique<MenuButton>(
+            ScreenPosition({0.5_frac, 0.3_frac}),
+            "New Game",
+            [this] {
+                _game.request(NewGameRequest{});
+            })
+    });
+}
+
+void Terminal::attachTo(Game& game)
+{
+    _game = game;
+    _game.attach(this);
 }
 
 // TODO: Subscribe controller directly to input? Should be nice.
 
-void PlayerView::listen(const input::ButtonEvent& buttonEvent)
+void Terminal::listen(const input::ButtonEvent& buttonEvent)
 {
-    if (buttonEvent.button == input::Button::MouseRight) {
+    if (buttonEvent.button == input::MenuButton::MouseRight) {
         auto controller = _controller.lock();
         if (controller) {
             if (buttonEvent.action == input::ButtonEvent::Action::Press) {
@@ -32,7 +51,7 @@ void PlayerView::listen(const input::ButtonEvent& buttonEvent)
     }
 }
 
-void PlayerView::listen(const input::PointerMotionEvent& event)
+void Terminal::listen(const input::PointerMotionEvent& event)
 {
     if (_controllerStateDown) {
         auto controller = _controller.lock();
@@ -43,34 +62,39 @@ void PlayerView::listen(const input::PointerMotionEvent& event)
     }
 }
 
-void PlayerView::subscribeToInput(input::InputManager& inputManager)
+void Terminal::subscribeToInput(input::InputManager& inputManager)
 {
     inputManager.subscribe<input::ButtonEvent>(this);
     inputManager.subscribe<input::PointerMotionEvent>(this);
 }
 
-void PlayerView::loadResources()
+void Terminal::loadResources()
 {
-    _resources.loadGraphics(_renderer, "../../assets");
+    _resources.loadGraphics(_canvas, "../../assets");
 }
 
-void PlayerView::update(double deltaSec)
+void Terminal::update(double deltaSec)
 {
     _scene.update(deltaSec);
 }
 
-void PlayerView::render()
+void Terminal::render()
 {
-    _renderer.clear(BACKGROUND_COLOR);
-    _scene.render(_renderer);
-    _renderer.present();
+    _canvas.clear(BACKGROUND_COLOR);
+    //_scene.render(_renderer);
+
+
+
+
+
+    _canvas.present();
 }
 
 //
 // Handlers to notifications from game core
 //
 
-void PlayerView::onActorSpawn(std::shared_ptr<Actor> actor)
+void Terminal::onActorSpawn(std::shared_ptr<Actor> actor)
 {
     auto position = actor->get<PositionComponent>();
     auto graphics = actor->get<GraphicsComponent>();
@@ -85,21 +109,21 @@ void PlayerView::onActorSpawn(std::shared_ptr<Actor> actor)
     }
 }
 
-void PlayerView::onTilesLoaded(const TileMap& tileMap)
+void Terminal::onTilesLoaded(const TileMap& tileMap)
 {
     _scene.setTiles(_resources, tileMap);
 }
 
-void PlayerView::onControllerSpawn(
+void Terminal::onControllerSpawn(
     std::shared_ptr<ControllerComponent> controller)
 {
     _controller = controller;
 }
 
-Vector<double> PlayerView::motionInput(int mouseX, int mouseY) const
+Vector<double> Terminal::motionInput(int mouseX, int mouseY) const
 {
     ScreenPoint rendererMiddle {
-        _renderer.size().width / 2, _renderer.size().height / 2};
+        _canvas.size().width / 2, _canvas.size().height / 2};
 
     Vector<double> offset = {
         1.0 * mouseX - rendererMiddle.x,

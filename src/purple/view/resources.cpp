@@ -10,13 +10,13 @@ namespace fs = std::experimental::filesystem;
 
 namespace {
 
-std::shared_ptr<Texture> makeTexture(const Image& image, const Renderer& renderer)
+std::shared_ptr<Image> makeTexture(const Image& image, const Canvas& renderer)
 {
     SDL_Texture* rawTexture =
         SDL_CreateTextureFromSurface(renderer.raw(), image.raw());
     checkSdlCall("SDL_CreateTextureFromSurface", rawTexture);
 
-    return std::make_shared<Texture>(rawTexture);
+    return std::make_shared<Image>(rawTexture);
 }
 
 } // namespace
@@ -53,7 +53,7 @@ std::shared_ptr<GraphicsResource> ResourceStorage::graphics(
     return i->second;
 }
 
-void ResourceStorage::loadGraphics(const Renderer& canvas, const std::string& location)
+void ResourceStorage::loadGraphics(const Canvas& canvas, const std::string& location)
 {
     fs::path basePath = location;
 
@@ -88,7 +88,7 @@ void ResourceStorage::loadTestLevel()
 }
 
 std::shared_ptr<BitmapResource> ResourceStorage::loadBitmapResource(
-    const Renderer& renderer, const std::string& path)
+    const Canvas& renderer, const std::string& path)
 {
     Image image(path);
     auto texture = makeTexture(image, renderer);
@@ -97,7 +97,7 @@ std::shared_ptr<BitmapResource> ResourceStorage::loadBitmapResource(
 }
 
 std::shared_ptr<AnimationResource> ResourceStorage::loadAnimationResource(
-    const Renderer& renderer, const std::string& path)
+    const Canvas& renderer, const std::string& path)
 {
     Image image(path);
     auto texture = makeTexture(image, renderer);

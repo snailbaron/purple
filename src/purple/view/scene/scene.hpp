@@ -13,7 +13,7 @@
 class SceneTiles {
 public:
     void loadTiles(const ResourceStorage& resources, const TileMap& tileMap);
-    void render(Renderer& canvas, const ScreenOffset& screenOffset) const;
+    void render(Canvas& canvas, const ScreenOffset& screenOffset) const;
 
 private:
     size_t _width;
@@ -32,7 +32,7 @@ private:
 class Scene {
 public:
     void update(double deltaSec);
-    void render(Renderer& canvas) const;
+    void render(Canvas& canvas) const;
 
     void positionCamera(std::shared_ptr<PositionComponent> cameraPosition);
     void setTiles(const ResourceStorage& resources, const TileMap& tileMap);

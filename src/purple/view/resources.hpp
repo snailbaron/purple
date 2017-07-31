@@ -1,6 +1,6 @@
 #pragma once
 
-#include "renderer.hpp"
+#include "canvas.hpp"
 #include "visual.hpp"
 
 #include <SDL.h>
@@ -31,13 +31,13 @@ public:
 
 class BitmapResource : public GraphicsResource {
 public:
-    BitmapResource(std::shared_ptr<Texture> texture, int width, int height)
+    BitmapResource(std::shared_ptr<Image> texture, int width, int height)
         : _texture(texture), _width(width), _height(height) {}
 
     std::unique_ptr<Visual> createGraphics() const override;
 
 private:
-    std::shared_ptr<Texture> _texture;
+    std::shared_ptr<Image> _texture;
     int _width;
     int _height;
 };
@@ -45,7 +45,7 @@ private:
 class AnimationResource : public GraphicsResource {
 public:
     AnimationResource(
-            std::shared_ptr<Texture> texture,
+            std::shared_ptr<Image> texture,
             int frameWidth,
             int frameHeight,
             int frameCount)
@@ -58,7 +58,7 @@ public:
     std::unique_ptr<Visual> createGraphics() const override;
 
 private:
-    std::shared_ptr<Texture> _texture;
+    std::shared_ptr<Image> _texture;
     int _frameWidth;
     int _frameHeight;
     int _frameCount;
@@ -66,16 +66,16 @@ private:
 
 class ResourceStorage {
 public:
-    void loadGraphics(const Renderer& canvas, const std::string& location);
+    void loadGraphics(const Canvas& canvas, const std::string& location);
     void loadTestLevel();
 
     std::shared_ptr<GraphicsResource> graphics(const std::string& key) const;
 
 private:
     std::shared_ptr<BitmapResource> loadBitmapResource(
-        const Renderer& canvas, const std::string& path);
+        const Canvas& canvas, const std::string& path);
     std::shared_ptr<AnimationResource> loadAnimationResource(
-        const Renderer& canvas, const std::string& path);
+        const Canvas& canvas, const std::string& path);
 
     std::map<std::string, std::shared_ptr<GraphicsResource>> _graphicalResources;
 };

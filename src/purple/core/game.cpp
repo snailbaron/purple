@@ -1,16 +1,23 @@
-#include "core.hpp"
+#include "game.hpp"
 #include <purple/core/tile_map.h>
 #include <purple/core/component.hpp>
 #include <iostream>
 #include <algorithm>
 
-void Core::attach(std::shared_ptr<View> view)
+void Game::start()
+{
+    _outEvents.push(GameStartedEvent{});
+}
+
+void Game::attach(View* view)
 {
     _views.push_back(view);
 }
 
-void Core::update(double deltaSec)
+void Game::update(double deltaSec)
 {
+    _requests.send();
+
     for (auto actor : _actors) {
         auto movement = actor->get<MovementComponent>();
         auto position = actor->get<PositionComponent>();
@@ -41,7 +48,7 @@ void Core::update(double deltaSec)
         });
 }
 
-void Core::spawn(std::shared_ptr<Actor> actor)
+void Game::spawn(std::shared_ptr<Actor> actor)
 {
     _actors.push_back(actor);
     notifyViews(&View::onActorSpawn, actor);
@@ -52,7 +59,7 @@ void Core::spawn(std::shared_ptr<Actor> actor)
     }
 }
 
-void Core::forActiveViews(std::function<void(std::shared_ptr<View>)> action)
+void Game::forActiveViews(std::function<void(std::shared_ptr<View>)> action)
 {
     for (auto i = _views.begin(); i != _views.end(); ) {
         auto ptr = i->lock();
@@ -65,7 +72,12 @@ void Core::forActiveViews(std::function<void(std::shared_ptr<View>)> action)
     }
 }
 
-void Core::loadTestLevel()
+void Game::listen(const NewGameRequest&)
+{
+    loadTestLevel();
+}
+
+void Game::loadTestLevel()
 {
     TileSet tileSet;
     tileSet.fill({
@@ -108,5 +120,4 @@ void Core::loadTestLevel()
     camera->emplace<CameraComponent>(girl->get<PositionComponent>());
     camera->emplace<PositionComponent>(WorldPoint(10, 10));
     spawn(camera);
-
 }

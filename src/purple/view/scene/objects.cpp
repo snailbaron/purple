@@ -8,7 +8,7 @@ SceneGraphics::SceneGraphics(
 { }
 
 void SceneGraphics::render(
-    Renderer& renderer, const WorldPoint& cameraPosition) const
+    Canvas& renderer, const WorldPoint& cameraPosition) const
 {
     ScreenPoint rendererMiddle(
         renderer.size().width / 2,

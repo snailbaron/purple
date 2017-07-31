@@ -4,7 +4,7 @@
 
 namespace input {
 
-enum class Button {
+enum class MenuButton {
     // Mouse buttons
     MouseLeft,
     MouseMiddle,
@@ -17,7 +17,7 @@ struct ButtonEvent {
         Release,
     };
 
-    Button button;
+    MenuButton button;
     Action action;
     int x;
     int y;
@@ -39,11 +39,11 @@ public:
     template <class Event>
     void subscribe(Listener<Event>* listener)
     {
-        _eventQueue.subscribe<Event>(listener);
+        _outEvents.subscribe<Event>(listener);
     }
 
 private:
-    EventQueue _eventQueue;
+    EventQueue _outEvents;
 };
 
 } // namespace input
